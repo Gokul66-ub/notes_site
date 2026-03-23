@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Full Course — Interactive Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --surface2: #1a2234;
+  --border: #1e2d45;
+  --accent: #00d4ff;
+  --accent2: #7c3aed;
+  --accent3: #10b981;
+  --accent4: #f59e0b;
+  --text: #e2e8f0;
+  --text-muted: #64748b;
+  --tag: #38bdf8;
+  --attr: #fb923c;
+  --val: #fde68a;
+  --kw: #f472b6;
+  --cm: #475569;
+  --string: #86efac;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #0a0e1a 0%, #0d1b3e 50%, #0a0e1a 100%);
+  padding: 48px 32px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.hero::before {
+  content:'';
+  position:absolute;inset:0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,212,255,0.08) 0%, transparent 70%);
+}
+.hero-badge {
+  display:inline-flex;align-items:center;gap:8px;
+  background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.3);
+  border-radius:20px;padding:6px 16px;
+  font-size:0.78rem;font-weight:600;letter-spacing:1.5px;
+  color:var(--accent);text-transform:uppercase;
+  margin-bottom:20px;
+}
+.hero h1 {
+  font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:900;line-height:1.1;
+  margin-bottom:14px;
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero p {
+  font-size:1.05rem;color:var(--text-muted);
+  max-width:600px;margin:0 auto 28px;line-height:1.7;
+}
+.hero-chips {
+  display:flex;flex-wrap:wrap;justify-content:center;gap:10px;
+}
+.chip {
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:8px;padding:6px 14px;font-size:0.82rem;
+  color:var(--text-muted);font-weight:500;
+}
+
+/* ── SIDEBAR + LAYOUT ── */
+.layout {
+  display:grid;
+  grid-template-columns: 260px 1fr;
+  min-height: calc(100vh - 220px);
+}
+.sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px 0;
+  z-index: 10;
+}
+.sidebar::-webkit-scrollbar { width:4px; }
+.sidebar::-webkit-scrollbar-track { background:transparent; }
+.sidebar::-webkit-scrollbar-thumb { background:var(--border);border-radius:4px; }
+
+.sidebar-title {
+  padding:0 20px 14px;
+  font-size:0.7rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-muted);
+  border-bottom:1px solid var(--border);
+  margin-bottom:10px;
+}
+.nav-item {
+  display:flex;align-items:center;gap:10px;
+  padding:10px 20px;cursor:pointer;
+  font-size:0.88rem;font-weight:500;
+  color:var(--text-muted);
+  border-left:3px solid transparent;
+  transition:all .2s;
+}
+.nav-item:hover { background:var(--surface2);color:var(--text); }
+.nav-item.active {
+  background:rgba(0,212,255,0.08);
+  border-left-color:var(--accent);
+  color:var(--accent);
+}
+.nav-num {
+  min-width:22px;height:22px;
+  background:var(--surface2);
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.7rem;font-weight:700;
+}
+.nav-item.active .nav-num { background:var(--accent);color:#000; }
+
+/* ── MAIN CONTENT ── */
+.main { overflow:auto; }
+.chapter {
+  display:none;
+  padding:36px 40px;
+  max-width:1100px;
+}
+.chapter.active { display:block; }
+
+/* ── CHAPTER HEADER ── */
+.chapter-head {
+  margin-bottom:32px;
+  padding-bottom:24px;
+  border-bottom:1px solid var(--border);
+}
+.chapter-num {
+  font-size:0.72rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px;
+}
+.chapter-head h2 {
+  font-size:2rem;font-weight:800;
+  line-height:1.2;margin-bottom:12px;
+}
+.chapter-desc {
+  font-size:0.97rem;color:var(--text-muted);
+  line-height:1.75;max-width:680px;
+}
+
+/* ── CONCEPT BLOCKS ── */
+.concept {
+  margin-bottom:40px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+}
+.concept-header {
+  padding:16px 20px;
+  background:var(--surface2);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.concept-icon {
+  width:32px;height:32px;
+  background:rgba(0,212,255,0.1);
+  border:1px solid rgba(0,212,255,0.2);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+}
+.concept-header h3 {
+  font-size:1rem;font-weight:700;
+  color:var(--text);
+}
+.concept-body { padding:20px; }
+
+/* ── EXPLANATION BOX ── */
+.explain {
+  background:rgba(124,58,237,0.06);
+  border:1px solid rgba(124,58,237,0.2);
+  border-radius:10px;
+  padding:16px 18px;
+  margin-bottom:18px;
+  font-size:0.9rem;
+  line-height:1.75;
+  color:#c4b5fd;
+}
+.explain strong { color:#a78bfa; }
+.explain code {
+  background:rgba(124,58,237,0.15);
+  color:#c4b5fd;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.82em;
+  padding:2px 6px;border-radius:4px;
+}
+
+/* ── TIP / NOTE / WARN ── */
+.tip {
+  background:rgba(16,185,129,0.07);
+  border:1px solid rgba(16,185,129,0.25);
+  border-radius:10px;padding:13px 16px;
+  margin:14px 0;font-size:0.87rem;
+  color:#6ee7b7;line-height:1.7;
+}
+.tip strong { color:#10b981; }
+.warn {
+  background:rgba(245,158,11,0.07);
+  border:1px solid rgba(245,158,11,0.25);
+  border-radius:10px;padding:13px 16px;
+  margin:14px 0;font-size:0.87rem;
+  color:#fde68a;line-height:1.7;
+}
+.warn strong { color:#f59e0b; }
+
+/* ── CODE + OUTPUT PANEL ── */
+.split {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:16px;
+}
+.split.full { grid-template-columns:1fr; }
+
+.panel {
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid var(--border);
+}
+.panel-head {
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 14px;
+  background:var(--surface2);
+  border-bottom:1px solid var(--border);
+}
+.panel-label {
+  font-size:0.72rem;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+}
+.panel-label.code-lbl { color:var(--accent); }
+.panel-label.out-lbl { color:var(--accent3); }
+.dots { display:flex;gap:5px; }
+.dot {
+  width:9px;height:9px;border-radius:50%;
+}
+.d1{background:#ff5f57;} .d2{background:#febc2e;} .d3{background:#28c840;}
+
+/* ── SYNTAX HIGHLIGHTED PRE ── */
+pre.code-block {
+  background:#070c16;
+  padding:18px;
+  overflow-x:auto;
+  margin:0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.82rem;
+  line-height:1.7;
+  white-space:pre;
+}
+pre.code-block::-webkit-scrollbar { height:4px; }
+pre.code-block::-webkit-scrollbar-thumb { background:var(--border);border-radius:4px; }
+
+/* Syntax tokens */
+.t  { color:#e2e8f0; }
+.tg { color:#38bdf8; }
+.at { color:#fb923c; }
+.vl { color:#fde68a; }
+.kw { color:#f472b6; font-weight:700; }
+.cm { color:#475569; font-style:italic; }
+.st { color:#86efac; }
+.pu { color:#94a3b8; }
+.nr { color:#c084fc; }
+
+/* ── OUTPUT IFRAME ── */
+.output-frame {
+  width:100%;
+  min-height:180px;
+  border:none;
+  background:#fff;
+  display:block;
+}
+
+/* ── INLINE ATTR TABLE ── */
+.attr-table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:0.87rem;
+  margin-top:14px;
+}
+.attr-table th {
+  background:var(--surface2);
+  padding:10px 14px;
+  text-align:left;
+  font-weight:700;
+  color:var(--text-muted);
+  font-size:0.75rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  border-bottom:1px solid var(--border);
+}
+.attr-table td {
+  padding:10px 14px;
+  border-bottom:1px solid rgba(30,45,69,0.5);
+  line-height:1.6;
+}
+.attr-table tr:hover td { background:rgba(0,212,255,0.03); }
+.attr-table code {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.8em;
+  background:rgba(0,212,255,0.08);
+  color:var(--accent);
+  padding:2px 6px;border-radius:4px;
+}
+
+/* ── SECTION DIVIDER ── */
+.divider {
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+  margin:32px 0;
+}
+
+/* ── SCROLLBAR for main ── */
+.main::-webkit-scrollbar { width:6px; }
+.main::-webkit-scrollbar-track { background:var(--bg); }
+.main::-webkit-scrollbar-thumb { background:var(--border);border-radius:4px; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .layout { grid-template-columns:1fr; }
+  .sidebar { position:fixed;left:-260px;top:0;height:100vh;transition:left .3s;z-index:100; }
+  .sidebar.open { left:0; }
+  .split { grid-template-columns:1fr; }
+  .chapter { padding:24px 20px; }
+  .hamburger { display:flex!important; }
+}
+.hamburger {
+  display:none;
+  position:fixed;bottom:20px;right:20px;
+  width:50px;height:50px;
+  background:var(--accent);
+  border-radius:50%;border:none;cursor:pointer;
+  align-items:center;justify-content:center;
+  z-index:200;font-size:1.3rem;color:#000;
+  box-shadow:0 4px 20px rgba(0,212,255,0.4);
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">📘 Full Course Notes</div>
+  <h1>HTML — Complete Interactive Notes</h1>
+  <p>Every concept from the course — with <strong>live code output</strong> side by side. Type, read, and see results instantly.</p>
+  <div class="hero-chips">
+    <span class="chip">🏗 Document Structure</span>
+    <span class="chip">✏️ Text & Formatting</span>
+    <span class="chip">🔗 Links & Images</span>
+    <span class="chip">📋 Lists & Tables</span>
+    <span class="chip">📝 Forms & Inputs</span>
+    <span class="chip">🧱 Semantic HTML</span>
+    <span class="chip">🎬 Audio & Video</span>
+    <span class="chip">📦 Div · Span · Class</span>
+    <span class="chip">🌐 Meta & Head</span>
+    <span class="chip">🎯 Mini Project</span>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-title">Course Chapters</div>
+  <div class="nav-item active" onclick="show(0,this)"><span class="nav-num">1</span> What is HTML?</div>
+  <div class="nav-item" onclick="show(1,this)"><span class="nav-num">2</span> Head & Meta Tags</div>
+  <div class="nav-item" onclick="show(2,this)"><span class="nav-num">3</span> Document Structure</div>
+  <div class="nav-item" onclick="show(3,this)"><span class="nav-num">4</span> Text & Formatting</div>
+  <div class="nav-item" onclick="show(4,this)"><span class="nav-num">5</span> Links</div>
+  <div class="nav-item" onclick="show(5,this)"><span class="nav-num">6</span> Images</div>
+  <div class="nav-item" onclick="show(6,this)"><span class="nav-num">7</span> Lists</div>
+  <div class="nav-item" onclick="show(7,this)"><span class="nav-num">8</span> Tables</div>
+  <div class="nav-item" onclick="show(8,this)"><span class="nav-num">9</span> Forms & Inputs</div>
+  <div class="nav-item" onclick="show(9,this)"><span class="nav-num">10</span> Semantic Tags</div>
+  <div class="nav-item" onclick="show(10,this)"><span class="nav-num">11</span> Div · Span · Class</div>
+  <div class="nav-item" onclick="show(11,this)"><span class="nav-num">12</span> Audio & Video</div>
+  <div class="nav-item" onclick="show(12,this)"><span class="nav-num">13</span> Iframes</div>
+  <div class="nav-item" onclick="show(13,this)"><span class="nav-num">14</span> HTML Entities</div>
+  <div class="nav-item" onclick="show(14,this)"><span class="nav-num">15</span> 🚀 Mini Project</div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- ══════════════════════════════════════
+  CH 1 — WHAT IS HTML
+══════════════════════════════════════ -->
+<div class="chapter active" id="ch0">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 01</div>
+    <h2>What is HTML?</h2>
+    <p class="chapter-desc">HTML (HyperText Markup Language) is the standard language used to build the skeleton of every webpage. It tells the browser <em>what</em> content to display and how it is organised — not how it looks (that's CSS) or how it behaves (that's JavaScript).</p>
+  </div>
+
+  <!-- Concept 1 -->
+  <div class="concept">
+    <div class="concept-header">
+      <div class="concept-icon">🏠</div>
+      <h3>The House Analogy</h3>
+    </div>
+    <div class="concept-body">
+      <div class="explain">
+        Think of building a website like building a house:<br>
+        &nbsp;&nbsp;• <strong>HTML</strong> = The walls, floors, rooms — the <em>structure</em><br>
+        &nbsp;&nbsp;• <strong>CSS</strong> = The paint, furniture, decorations — the <em>style</em><br>
+        &nbsp;&nbsp;• <strong>JavaScript</strong> = The electricity, plumbing, appliances — the <em>logic</em><br><br>
+        HTML is <strong>not a programming language</strong>. It has no loops, conditions, or calculations. It is a <strong>markup language</strong> — you "mark up" content with tags to give it meaning.
+      </div>
+      <div class="tip"><strong>💡 Fun Fact:</strong> HTML was invented by <strong>Tim Berners-Lee</strong> in 1991. The World Wide Web started in 1989. The current version is <strong>HTML5</strong> (2014, still updated).</div>
+    </div>
+  </div>
+
+  <!-- Concept 2 -->
+  <div class="concept">
+    <div class="concept-header">
+      <div class="concept-icon">🔖</div>
+      <h3>Tags, Elements & Attributes — The Building Blocks</h3>
+    </div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>Tag</strong> = An instruction wrapped in angle brackets: <code>&lt;tagname&gt;</code><br>
+        <strong>Element</strong> = Opening tag + content + closing tag: <code>&lt;p&gt;Hello&lt;/p&gt;</code><br>
+        <strong>Attribute</strong> = Extra info inside the opening tag: <code>&lt;a href="url"&gt;</code><br>
+        <strong>Self-closing tag</strong> = Tags with no content and no closing tag: <code>&lt;br&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;hr&gt;</code>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">HTML CODE</span></div>
+          <pre class="code-block"><span class="cm">&lt;!-- An element: tag + content + closing tag --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">This is a paragraph element.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- An element with an attribute --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">https://google.com</span><span class="pu">"&gt;</span><span class="t">Click me</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Self-closing tag (no content, no closing tag) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">hr</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">img</span> <span class="at">src</span><span class="pu">="</span><span class="vl">photo.jpg</span><span class="pu">"</span> <span class="at">alt</span><span class="pu">="</span><span class="vl">A photo</span><span class="pu">"&gt;</span>
+</pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">LIVE OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:140px" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:15px;}</style><p>This is a paragraph element.</p><a href="#">Click me</a><br><hr><p style="color:#888;font-size:13px;">[img tag shown here — needs a real src to render]</p>'></iframe>
+        </div>
+      </div>
+      <div class="warn"><strong>⚠️ Always</strong> write tags in <strong>lowercase</strong>. <code>&lt;body&gt;</code> ✅ not <code>&lt;BODY&gt;</code> ❌. Always close your tags — forgetting <code>&lt;/p&gt;</code> or <code>&lt;/div&gt;</code> causes layout bugs.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 2 — HEAD & META
+══════════════════════════════════════ -->
+<div class="chapter" id="ch1">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 02</div>
+    <h2>The &lt;head&gt; Element & Meta Tags</h2>
+    <p class="chapter-desc">The <code>&lt;head&gt;</code> contains metadata — information <em>about</em> your page that is not shown on the screen. This is where you set the title, character encoding, viewport, and link stylesheets.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🧠</div><h3>Complete Head Section Explained</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>charset</strong>: Tells browser to use UTF-8 encoding so special characters (ñ, é, ₹) display correctly.<br>
+        <strong>viewport</strong>: Makes the page responsive on mobile devices — without it, mobile zooms out.<br>
+        <strong>title</strong>: Shown on browser tab and used by Google in search results.<br>
+        <strong>description</strong>: Shown under the link in Google search results (SEO).<br>
+        <strong>link rel="stylesheet"</strong>: Connects an external CSS file to style the page.<br>
+        <strong>link rel="icon"</strong>: Sets the small icon on the browser tab (favicon).
+      </div>
+      <div class="split full">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">COMPLETE &lt;head&gt; EXAMPLE</span></div>
+          <pre class="code-block"><span class="pu">&lt;!</span><span class="kw">DOCTYPE</span> <span class="t">html</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">html</span> <span class="at">lang</span><span class="pu">="</span><span class="vl">en</span><span class="pu">"&gt;</span>
+
+  <span class="pu">&lt;</span><span class="tg">head</span><span class="pu">&gt;</span>
+
+    <span class="cm">&lt;!-- 1. Character Encoding: lets browser show all characters --&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">meta</span> <span class="at">charset</span><span class="pu">="</span><span class="vl">UTF-8</span><span class="pu">"&gt;</span>
+
+    <span class="cm">&lt;!-- 2. Viewport: makes page responsive on phones/tablets --&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">meta</span> <span class="at">name</span><span class="pu">="</span><span class="vl">viewport</span><span class="pu">"</span> <span class="at">content</span><span class="pu">="</span><span class="vl">width=device-width, initial-scale=1.0</span><span class="pu">"&gt;</span>
+
+    <span class="cm">&lt;!-- 3. Title: appears on browser tab + Google search --&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">title</span><span class="pu">&gt;</span><span class="t">My Awesome Website</span><span class="pu">&lt;/</span><span class="tg">title</span><span class="pu">&gt;</span>
+
+    <span class="cm">&lt;!-- 4. Description: shown in Google search results (SEO) --&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">meta</span> <span class="at">name</span><span class="pu">="</span><span class="vl">description</span><span class="pu">"</span> <span class="at">content</span><span class="pu">="</span><span class="vl">A portfolio site for Jane Doe</span><span class="pu">"&gt;</span>
+
+    <span class="cm">&lt;!-- 5. Author: who made this page --&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">meta</span> <span class="at">name</span><span class="pu">="</span><span class="vl">author</span><span class="pu">"</span> <span class="at">content</span><span class="pu">="</span><span class="vl">Jane Doe</span><span class="pu">"&gt;</span>
+
+    <span class="cm">&lt;!-- 6. Favicon: small icon shown on browser tab --&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">link</span> <span class="at">rel</span><span class="pu">="</span><span class="vl">icon</span><span class="pu">"</span> <span class="at">type</span><span class="pu">="</span><span class="vl">image/x-icon</span><span class="pu">"</span> <span class="at">href</span><span class="pu">="</span><span class="vl">favicon.ico</span><span class="pu">"&gt;</span>
+
+    <span class="cm">&lt;!-- 7. Link CSS: connect an external stylesheet --&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">link</span> <span class="at">rel</span><span class="pu">="</span><span class="vl">stylesheet</span><span class="pu">"</span> <span class="at">href</span><span class="pu">="</span><span class="vl">style.css</span><span class="pu">"&gt;</span>
+
+    <span class="cm">&lt;!-- 8. Internal CSS: write styles directly inside the head --&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">style</span><span class="pu">&gt;</span>
+      <span class="t">body { background-color: lightyellow; }</span>
+    <span class="pu">&lt;/</span><span class="tg">style</span><span class="pu">&gt;</span>
+
+  <span class="pu">&lt;/</span><span class="tg">head</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;/</span><span class="tg">html</span><span class="pu">&gt;</span></pre>
+        </div>
+      </div>
+      <div class="tip"><strong>💡 Nothing inside &lt;head&gt;</strong> is shown on the page — it's invisible metadata. Only <code>&lt;title&gt;</code> appears on the tab. Everything the user <em>sees</em> goes inside <code>&lt;body&gt;</code>.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 3 — DOCUMENT STRUCTURE
+══════════════════════════════════════ -->
+<div class="chapter" id="ch2">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 03</div>
+    <h2>Document Structure</h2>
+    <p class="chapter-desc">Every valid HTML page must follow this exact skeleton. Think of it as the mandatory frame every house must have before you can add rooms.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🏗</div><h3>The Complete HTML5 Skeleton</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;!DOCTYPE html&gt;</strong> — Always the very first line. Tells the browser this is an HTML5 document. Without it, browsers go into "quirks mode" and render things differently.<br><br>
+        <strong>&lt;html lang="en"&gt;</strong> — The root element. Everything lives inside this. <code>lang</code> helps screen readers and search engines know the page language.<br><br>
+        <strong>&lt;head&gt;</strong> — Invisible metadata section (title, charset, CSS links).<br><br>
+        <strong>&lt;body&gt;</strong> — Everything the user <em>sees</em> goes here. Only one <code>&lt;body&gt;</code> per page.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">HTML SKELETON</span></div>
+          <pre class="code-block"><span class="cm">&lt;!-- 1: DOCTYPE must be FIRST, before everything --&gt;</span>
+<span class="pu">&lt;!</span><span class="kw">DOCTYPE</span> <span class="t">html</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- 2: Root element wraps the entire document --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">html</span> <span class="at">lang</span><span class="pu">="</span><span class="vl">en</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- 3: HEAD — invisible info about the page --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">head</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">meta</span> <span class="at">charset</span><span class="pu">="</span><span class="vl">UTF-8</span><span class="pu">"&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">meta</span> <span class="at">name</span><span class="pu">="</span><span class="vl">viewport</span><span class="pu">"</span>
+          <span class="at">content</span><span class="pu">="</span><span class="vl">width=device-width, initial-scale=1.0</span><span class="pu">"&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">title</span><span class="pu">&gt;</span><span class="t">My Page Title</span><span class="pu">&lt;/</span><span class="tg">title</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">head</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- 4: BODY — everything the user sees --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">body</span><span class="pu">&gt;</span>
+
+    <span class="pu">&lt;</span><span class="tg">h1</span><span class="pu">&gt;</span><span class="t">Hello, World!</span><span class="pu">&lt;/</span><span class="tg">h1</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Welcome to my first webpage.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+  <span class="pu">&lt;/</span><span class="tg">body</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;/</span><span class="tg">html</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">LIVE OUTPUT</span></div>
+          <iframe class="output-frame" srcdoc='<h1>Hello, World!</h1><p>Welcome to my first webpage.</p><p style="color:#888;font-size:12px;margin-top:10px;">(Title "My Page Title" appears on browser tab)</p>'></iframe>
+        </div>
+      </div>
+      <div class="tip"><strong>💡 Comments:</strong> Use <code>&lt;!-- your comment here --&gt;</code> anywhere to add notes. The browser ignores them — only you can see them in the source code. Great for explaining your code!</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 4 — TEXT & FORMATTING
+══════════════════════════════════════ -->
+<div class="chapter" id="ch3">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 04</div>
+    <h2>Text Basics & Formatting</h2>
+    <p class="chapter-desc">Headings give your page hierarchy. Paragraphs hold your text. Formatting tags add meaning like bold, italic, quotes, and more.</p>
+  </div>
+
+  <!-- Headings -->
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">📰</div><h3>Headings — h1 to h6</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        HTML has <strong>6 heading levels</strong>. <code>&lt;h1&gt;</code> is the most important (main page title — use only <strong>once per page</strong>). <code>&lt;h6&gt;</code> is the least important. Search engines (Google) use headings to understand your page structure — so use them in order, like a book's chapters.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="pu">&lt;</span><span class="tg">h1</span><span class="pu">&gt;</span><span class="t">Heading 1 — Main Title</span><span class="pu">&lt;/</span><span class="tg">h1</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">h2</span><span class="pu">&gt;</span><span class="t">Heading 2 — Section</span><span class="pu">&lt;/</span><span class="tg">h2</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">h3</span><span class="pu">&gt;</span><span class="t">Heading 3 — Sub-section</span><span class="pu">&lt;/</span><span class="tg">h3</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">h4</span><span class="pu">&gt;</span><span class="t">Heading 4</span><span class="pu">&lt;/</span><span class="tg">h4</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">h5</span><span class="pu">&gt;</span><span class="t">Heading 5</span><span class="pu">&lt;/</span><span class="tg">h5</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">h6</span><span class="pu">&gt;</span><span class="t">Heading 6 — Smallest</span><span class="pu">&lt;/</span><span class="tg">h6</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">OUTPUT</span></div>
+          <iframe class="output-frame" srcdoc='<h1>Heading 1 — Main Title</h1><h2>Heading 2 — Section</h2><h3>Heading 3 — Sub-section</h3><h4>Heading 4</h4><h5>Heading 5</h5><h6>Heading 6 — Smallest</h6>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paragraphs & Lines -->
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">¶</div><h3>Paragraphs, Line Breaks & Dividers</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <code>&lt;p&gt;</code> creates a <strong>block of text</strong> with automatic spacing above and below.<br>
+        <code>&lt;br&gt;</code> = line break (moves to next line <em>without</em> starting a new paragraph).<br>
+        <code>&lt;hr&gt;</code> = horizontal rule — a visible divider line between sections.<br>
+        <code>&lt;pre&gt;</code> = pre-formatted text — preserves spaces and line breaks exactly as typed.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">This is the first paragraph.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Line one.</span><span class="pu">&lt;</span><span class="tg">br</span><span class="pu">&gt;</span><span class="t">Line two (same paragraph).</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">hr</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">pre</span><span class="pu">&gt;</span><span class="t">This    text
+   preserves
+      spacing!</span><span class="pu">&lt;/</span><span class="tg">pre</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">OUTPUT</span></div>
+          <iframe class="output-frame" srcdoc='<p>This is the first paragraph.</p><p>Line one.<br>Line two (same paragraph).</p><hr><pre>This    text
+   preserves
+      spacing!</pre>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Text Formatting -->
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">✏️</div><h3>Text Formatting Tags</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;b&gt;</strong> = Bold (visual only, no extra meaning) | <strong>&lt;strong&gt;</strong> = Bold + important meaning (prefer this!)<br>
+        <strong>&lt;i&gt;</strong> = Italic (visual only) | <strong>&lt;em&gt;</strong> = Italic + emphasis meaning (prefer this!)<br>
+        <strong>&lt;u&gt;</strong> = Underline | <strong>&lt;s&gt;</strong> = Strikethrough | <strong>&lt;mark&gt;</strong> = Highlighted text<br>
+        <strong>&lt;sup&gt;</strong> = Superscript (e.g. x²) | <strong>&lt;sub&gt;</strong> = Subscript (e.g. H₂O)<br>
+        <strong>&lt;q&gt;</strong> = Inline quotation | <strong>&lt;blockquote&gt;</strong> = Block-level quote<br>
+        <strong>&lt;abbr title=""&gt;</strong> = Abbreviation with tooltip on hover
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;&lt;</span><span class="tg">b</span><span class="pu">&gt;</span><span class="t">Bold</span><span class="pu">&lt;/</span><span class="tg">b</span><span class="pu">&gt;</span><span class="t"> and </span><span class="pu">&lt;</span><span class="tg">strong</span><span class="pu">&gt;</span><span class="t">Strong</span><span class="pu">&lt;/</span><span class="tg">strong</span><span class="pu">&gt;&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;&lt;</span><span class="tg">i</span><span class="pu">&gt;</span><span class="t">Italic</span><span class="pu">&lt;/</span><span class="tg">i</span><span class="pu">&gt;</span><span class="t"> and </span><span class="pu">&lt;</span><span class="tg">em</span><span class="pu">&gt;</span><span class="t">Emphasis</span><span class="pu">&lt;/</span><span class="tg">em</span><span class="pu">&gt;&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;&lt;</span><span class="tg">u</span><span class="pu">&gt;</span><span class="t">Underline</span><span class="pu">&lt;/</span><span class="tg">u</span><span class="pu">&gt;</span><span class="t"> and </span><span class="pu">&lt;</span><span class="tg">s</span><span class="pu">&gt;</span><span class="t">Strikethrough</span><span class="pu">&lt;/</span><span class="tg">s</span><span class="pu">&gt;&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;&lt;</span><span class="tg">mark</span><span class="pu">&gt;</span><span class="t">Highlighted text</span><span class="pu">&lt;/</span><span class="tg">mark</span><span class="pu">&gt;&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">x</span><span class="pu">&lt;</span><span class="tg">sup</span><span class="pu">&gt;</span><span class="t">2</span><span class="pu">&lt;/</span><span class="tg">sup</span><span class="pu">&gt;</span><span class="t"> and H</span><span class="pu">&lt;</span><span class="tg">sub</span><span class="pu">&gt;</span><span class="t">2</span><span class="pu">&lt;/</span><span class="tg">sub</span><span class="pu">&gt;</span><span class="t">O</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;&lt;</span><span class="tg">q</span><span class="pu">&gt;</span><span class="t">Short inline quote</span><span class="pu">&lt;/</span><span class="tg">q</span><span class="pu">&gt;&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">blockquote</span><span class="pu">&gt;</span><span class="t">A longer block quotation.</span><span class="pu">&lt;/</span><span class="tg">blockquote</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;&lt;</span><span class="tg">abbr</span> <span class="at">title</span><span class="pu">="</span><span class="vl">HyperText Markup Language</span><span class="pu">"&gt;</span><span class="t">HTML</span><span class="pu">&lt;/</span><span class="tg">abbr</span><span class="pu">&gt;</span><span class="t"> (hover me!)</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">OUTPUT</span></div>
+          <iframe class="output-frame" srcdoc='<p><b>Bold</b> and <strong>Strong</strong></p><p><i>Italic</i> and <em>Emphasis</em></p><p><u>Underline</u> and <s>Strikethrough</s></p><p><mark>Highlighted text</mark></p><p>x<sup>2</sup> and H<sub>2</sub>O</p><p><q>Short inline quote</q></p><blockquote>A longer block quotation.</blockquote><p><abbr title="HyperText Markup Language">HTML</abbr> (hover me!)</p>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 5 — LINKS
+══════════════════════════════════════ -->
+<div class="chapter" id="ch4">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 05</div>
+    <h2>Links — The &lt;a&gt; Anchor Tag</h2>
+    <p class="chapter-desc">Links connect pages together — they are what makes the "HyperText" in HTML. The anchor tag <code>&lt;a&gt;</code> can link to external pages, internal sections, files, email addresses, and phone numbers.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🔗</div><h3>All Types of Links</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>href</strong> = "hypertext reference" — the destination URL.<br>
+        <strong>target="_blank"</strong> = Opens link in a <em>new</em> tab (use for external links).<br>
+        <strong>href="#id"</strong> = Jumps to an element with that <code>id</code> on the same page (anchor link).<br>
+        <strong>mailto:</strong> = Opens the user's email app.<br>
+        <strong>tel:</strong> = Opens phone dialer on mobile.<br>
+        <strong>title</strong> = Tooltip text shown when hovering over the link.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="cm">&lt;!-- External link: opens in same tab --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">https://www.google.com</span><span class="pu">"&gt;</span><span class="t">Go to Google</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- External link: opens in NEW tab --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">https://www.google.com</span><span class="pu">"</span>
+   <span class="at">target</span><span class="pu">="</span><span class="vl">_blank</span><span class="pu">"&gt;</span><span class="t">Google (New Tab)</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Internal link to another file --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">about.html</span><span class="pu">"&gt;</span><span class="t">About Page</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Anchor link: jump to #section on same page --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">#contact</span><span class="pu">"&gt;</span><span class="t">Jump to Contact</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Email link --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">mailto:jane@email.com</span><span class="pu">"&gt;</span><span class="t">Email Me</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Phone link (works on mobile) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">tel:+911234567890</span><span class="pu">"&gt;</span><span class="t">Call Me</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Link with tooltip --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">https://google.com</span><span class="pu">"</span>
+   <span class="at">title</span><span class="pu">="</span><span class="vl">Visit Google Search</span><span class="pu">"&gt;</span><span class="t">Hover for tooltip</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Clickable image (image inside a link) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">https://google.com</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">img</span> <span class="at">src</span><span class="pu">="</span><span class="vl">logo.png</span><span class="pu">"</span> <span class="at">alt</span><span class="pu">="</span><span class="vl">Google</span><span class="pu">"</span> <span class="at">width</span><span class="pu">="</span><span class="vl">80</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:220px" srcdoc='<style>body{font-family:Arial;padding:14px;} a{display:block;margin:8px 0;font-size:15px;}</style><a href="https://www.google.com">Go to Google</a><a href="https://www.google.com" target="_blank">Google (New Tab)</a><a href="about.html">About Page</a><a href="#contact">Jump to Contact</a><a href="mailto:jane@email.com">Email Me</a><a href="tel:+911234567890">Call Me</a><a href="https://google.com" title="Visit Google Search">Hover for tooltip</a>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 6 — IMAGES
+══════════════════════════════════════ -->
+<div class="chapter" id="ch5">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 06</div>
+    <h2>Images — &lt;img&gt;</h2>
+    <p class="chapter-desc">The <code>&lt;img&gt;</code> tag embeds images. It is self-closing (no ending tag). Always include <code>alt</code> text for accessibility and SEO.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🖼</div><h3>Image Tag & All Attributes</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>src</strong> = path to image (local file or full URL).<br>
+        <strong>alt</strong> = alternate description if image fails to load. Screen readers read this. Google uses it for image SEO. <em>Always required.</em><br>
+        <strong>width / height</strong> = size in pixels or %. Set <em>only one</em> to avoid distortion.<br>
+        <strong>title</strong> = tooltip text when hovering.<br>
+        <strong>Relative path</strong> = <code>images/photo.jpg</code> (file in your project folder).<br>
+        <strong>Absolute URL</strong> = <code>https://site.com/photo.jpg</code> (file on the internet).
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="cm">&lt;!-- Local image (from your images/ folder) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">img</span> <span class="at">src</span><span class="pu">="</span><span class="vl">images/photo.jpg</span><span class="pu">"</span>
+     <span class="at">alt</span><span class="pu">="</span><span class="vl">A photo of me</span><span class="pu">"&gt;</span>
+
+<span class="cm">&lt;!-- Image from the internet --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">img</span>
+  <span class="at">src</span><span class="pu">="</span><span class="vl">https://picsum.photos/300/150</span><span class="pu">"</span>
+  <span class="at">alt</span><span class="pu">="</span><span class="vl">Random sample image</span><span class="pu">"</span>
+  <span class="at">width</span><span class="pu">="</span><span class="vl">300</span><span class="pu">"</span>
+  <span class="at">title</span><span class="pu">="</span><span class="vl">Hover tooltip here</span><span class="pu">"&gt;</span>
+
+<span class="cm">&lt;!-- If image fails, alt text shows instead --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">img</span> <span class="at">src</span><span class="pu">="</span><span class="vl">broken.jpg</span><span class="pu">"</span>
+     <span class="at">alt</span><span class="pu">="</span><span class="vl">This shows when image breaks</span><span class="pu">"</span>
+     <span class="at">width</span><span class="pu">="</span><span class="vl">200</span><span class="pu">"&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:200px" srcdoc='<style>body{font-family:Arial;padding:14px;}img{display:block;margin:8px 0;}</style><img src="https://picsum.photos/280/120" alt="Random sample image" width="280" title="Hover tooltip here"><img src="broken.jpg" alt="This shows when image breaks" width="200">'></iframe>
+        </div>
+      </div>
+      <div class="warn"><strong>⚠️ Never skip alt="".</strong> It's required for accessibility. Blind users rely on screen readers that read the <code>alt</code> text aloud. Also, search engines use <code>alt</code> to understand images.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 7 — LISTS
+══════════════════════════════════════ -->
+<div class="chapter" id="ch6">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 07</div>
+    <h2>Lists — Ordered, Unordered & Nested</h2>
+    <p class="chapter-desc">Lists organise related items. HTML has three kinds: unordered (bullets), ordered (numbers), and description lists.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">📋</div><h3>All List Types with Nesting</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;ul&gt;</strong> = Unordered list (bullets) — for items with no particular order.<br>
+        <strong>&lt;ol&gt;</strong> = Ordered list (numbers/letters) — for steps or ranked items.<br>
+        <strong>&lt;li&gt;</strong> = List item — goes inside both <code>&lt;ul&gt;</code> and <code>&lt;ol&gt;</code>.<br>
+        <strong>&lt;dl&gt; &lt;dt&gt; &lt;dd&gt;</strong> = Description list (term + definition pairs).<br>
+        <strong>Nested lists</strong> = Put a <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> inside an <code>&lt;li&gt;</code> to create sub-lists.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="cm">&lt;!-- Unordered list (bullets) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">ul</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">HTML</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">CSS</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">JavaScript</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">ul</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Ordered list (numbers) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">ol</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">Learn HTML</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">Learn CSS</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">ol</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Ordered with letters --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">ol</span> <span class="at">type</span><span class="pu">="</span><span class="vl">A</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">Option A</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">Option B</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">ol</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Nested list --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">ul</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">Frontend</span>
+    <span class="pu">&lt;</span><span class="tg">ul</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">HTML</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">CSS</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">ul</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">Backend</span>
+    <span class="pu">&lt;</span><span class="tg">ul</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">Python</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">ul</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">ul</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Description list --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">dl</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">dt</span><span class="pu">&gt;</span><span class="t">HTML</span><span class="pu">&lt;/</span><span class="tg">dt</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">dd</span><span class="pu">&gt;</span><span class="t">Structure of a webpage</span><span class="pu">&lt;/</span><span class="tg">dd</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">dt</span><span class="pu">&gt;</span><span class="t">CSS</span><span class="pu">&lt;/</span><span class="tg">dt</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">dd</span><span class="pu">&gt;</span><span class="t">Style of a webpage</span><span class="pu">&lt;/</span><span class="tg">dd</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">dl</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:400px" srcdoc='<style>body{font-family:Arial;padding:10px;font-size:14px;}</style><b>Unordered:</b><ul><li>HTML</li><li>CSS</li><li>JavaScript</li></ul><b>Ordered (numbers):</b><ol><li>Learn HTML</li><li>Learn CSS</li></ol><b>Ordered (letters):</b><ol type="A"><li>Option A</li><li>Option B</li></ol><b>Nested:</b><ul><li>Frontend<ul><li>HTML</li><li>CSS</li></ul></li><li>Backend<ul><li>Python</li></ul></li></ul><b>Description:</b><dl><dt><b>HTML</b></dt><dd>Structure of a webpage</dd><dt><b>CSS</b></dt><dd>Style of a webpage</dd></dl>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 8 — TABLES
+══════════════════════════════════════ -->
+<div class="chapter" id="ch7">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 08</div>
+    <h2>Tables — Rows, Columns, Merge</h2>
+    <p class="chapter-desc">Tables display data in rows and columns — like a spreadsheet. Use <code>colspan</code> to merge columns horizontally and <code>rowspan</code> to merge rows vertically.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">📊</div><h3>Basic Table Structure</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;table&gt;</strong> = Container for the whole table.<br>
+        <strong>&lt;thead&gt;</strong> = Header section | <strong>&lt;tbody&gt;</strong> = Body section | <strong>&lt;tfoot&gt;</strong> = Footer section.<br>
+        <strong>&lt;tr&gt;</strong> = Table row | <strong>&lt;th&gt;</strong> = Header cell (bold, centred) | <strong>&lt;td&gt;</strong> = Data cell.<br>
+        <strong>&lt;caption&gt;</strong> = Optional title shown above the table.<br>
+        <strong>colspan="n"</strong> = Cell spans <em>n</em> columns sideways.<br>
+        <strong>rowspan="n"</strong> = Cell spans <em>n</em> rows downward.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="pu">&lt;</span><span class="tg">table</span> <span class="at">border</span><span class="pu">="</span><span class="vl">1</span><span class="pu">"</span> <span class="at">style</span><span class="pu">="</span><span class="vl">width:100%;border-collapse:collapse</span><span class="pu">"&gt;</span>
+
+  <span class="pu">&lt;</span><span class="tg">caption</span><span class="pu">&gt;</span><span class="t">Student Results</span><span class="pu">&lt;/</span><span class="tg">caption</span><span class="pu">&gt;</span>
+
+  <span class="pu">&lt;</span><span class="tg">thead</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">tr</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">th</span><span class="pu">&gt;</span><span class="t">Name</span><span class="pu">&lt;/</span><span class="tg">th</span><span class="pu">&gt;</span>
+      <span class="cm">&lt;!-- colspan: merges 2 columns --&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">th</span> <span class="at">colspan</span><span class="pu">="</span><span class="vl">2</span><span class="pu">"&gt;</span><span class="t">Scores</span><span class="pu">&lt;/</span><span class="tg">th</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">tr</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">tr</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">th</span><span class="pu">&gt;&lt;/</span><span class="tg">th</span><span class="pu">&gt;&lt;</span><span class="tg">th</span><span class="pu">&gt;</span><span class="t">Maths</span><span class="pu">&lt;/</span><span class="tg">th</span><span class="pu">&gt;&lt;</span><span class="tg">th</span><span class="pu">&gt;</span><span class="t">Science</span><span class="pu">&lt;/</span><span class="tg">th</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">tr</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">thead</span><span class="pu">&gt;</span>
+
+  <span class="pu">&lt;</span><span class="tg">tbody</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">tr</span><span class="pu">&gt;</span>
+      <span class="cm">&lt;!-- rowspan: this cell spans 2 rows --&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">td</span> <span class="at">rowspan</span><span class="pu">="</span><span class="vl">2</span><span class="pu">"&gt;</span><span class="t">Arjun</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">90</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">85</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">tr</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">tr</span><span class="pu">&gt;</span>
+      <span class="cm">&lt;!-- No first td here: Arjun spans into it --&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">88</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">92</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">tr</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">tr</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">Priya</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">95</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">97</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">tr</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">tbody</span><span class="pu">&gt;</span>
+
+  <span class="pu">&lt;</span><span class="tg">tfoot</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">tr</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">Total</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">td</span> <span class="at">colspan</span><span class="pu">="</span><span class="vl">2</span><span class="pu">"&gt;</span><span class="t">3 Tests</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">tr</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">tfoot</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;/</span><span class="tg">table</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:250px" srcdoc='<style>table{width:100%;border-collapse:collapse;font-family:Arial;font-size:14px;}th,td{border:1px solid #999;padding:8px 12px;text-align:left;}th{background:#2c3e50;color:white;}caption{font-weight:bold;margin-bottom:6px;}tfoot td{background:#f0f0f0;font-weight:bold;}</style><table><caption>Student Results</caption><thead><tr><th>Name</th><th colspan="2">Scores</th></tr><tr><th></th><th>Maths</th><th>Science</th></tr></thead><tbody><tr><td rowspan="2">Arjun</td><td>90</td><td>85</td></tr><tr><td>88</td><td>92</td></tr><tr><td>Priya</td><td>95</td><td>97</td></tr></tbody><tfoot><tr><td>Total</td><td colspan="2">3 Tests</td></tr></tfoot></table>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 9 — FORMS
+══════════════════════════════════════ -->
+<div class="chapter" id="ch8">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 09</div>
+    <h2>Forms & All Input Types</h2>
+    <p class="chapter-desc">Forms collect user input — login, signup, contact, search. Every input should have a linked label for accessibility.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">📝</div><h3>Complete Form with Every Input Type</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;form action="" method=""&gt;</strong> = Container. <code>action</code>= where to send data. <code>method="get"</code> = data visible in URL. <code>method="post"</code> = hidden, secure (use for passwords).<br>
+        <strong>&lt;label for="id"&gt;</strong> = Links text label to its input by matching <code>id</code>. Click label = focuses input.<br>
+        <strong>required</strong> = Field cannot be empty. <strong>placeholder</strong> = Hint text. <strong>disabled</strong> = Grayed out, non-editable. <strong>value</strong> = Pre-filled value.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="pu">&lt;</span><span class="tg">form</span> <span class="at">action</span><span class="pu">="</span><span class="vl">#</span><span class="pu">"</span> <span class="at">method</span><span class="pu">="</span><span class="vl">post</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- Text --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">name</span><span class="pu">"&gt;</span><span class="t">Name:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">text</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">name</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">name</span><span class="pu">"</span>
+         <span class="at">placeholder</span><span class="pu">="</span><span class="vl">Your full name</span><span class="pu">"</span> <span class="at">required</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- Password --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">pwd</span><span class="pu">"&gt;</span><span class="t">Password:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">password</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">pwd</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">pwd</span><span class="pu">"</span>
+         <span class="at">placeholder</span><span class="pu">="</span><span class="vl">Enter password</span><span class="pu">" </span><span class="at">required</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- Email --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">email</span><span class="pu">"&gt;</span><span class="t">Email:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">email</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">email</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">email</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- Number --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">age</span><span class="pu">"&gt;</span><span class="t">Age:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">number</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">age</span><span class="pu">"</span> <span class="at">min</span><span class="pu">="</span><span class="vl">1</span><span class="pu">"</span> <span class="at">max</span><span class="pu">="</span><span class="vl">120</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- Date --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">dob</span><span class="pu">"&gt;</span><span class="t">Date of Birth:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">date</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">dob</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">dob</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- Radio (single select — same name groups them) --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Gender:</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">radio</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">m</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">gender</span><span class="pu">"</span> <span class="at">value</span><span class="pu">="</span><span class="vl">male</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">m</span><span class="pu">"&gt;</span><span class="t">Male</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">radio</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">f</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">gender</span><span class="pu">"</span> <span class="at">value</span><span class="pu">="</span><span class="vl">female</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">f</span><span class="pu">"&gt;</span><span class="t">Female</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- Checkbox (multiple select) --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Skills:</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">checkbox</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">html</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">skills</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">html</span><span class="pu">"&gt;</span><span class="t">HTML</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">checkbox</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">css</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">skills</span><span class="pu">"</span> <span class="at">checked</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">css</span><span class="pu">"&gt;</span><span class="t">CSS (pre-checked)</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- Dropdown select --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">city</span><span class="pu">"&gt;</span><span class="t">City:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">select</span> <span class="at">id</span><span class="pu">="</span><span class="vl">city</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">city</span><span class="pu">"&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">option</span> <span class="at">value</span><span class="pu">=""&gt;</span><span class="t">-- Select --</span><span class="pu">&lt;/</span><span class="tg">option</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">option</span> <span class="at">value</span><span class="pu">="</span><span class="vl">chennai</span><span class="pu">"&gt;</span><span class="t">Chennai</span><span class="pu">&lt;/</span><span class="tg">option</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">option</span> <span class="at">value</span><span class="pu">="</span><span class="vl">delhi</span><span class="pu">" </span><span class="at">selected</span><span class="pu">&gt;</span><span class="t">Delhi</span><span class="pu">&lt;/</span><span class="tg">option</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">option</span> <span class="at">value</span><span class="pu">="</span><span class="vl">mumbai</span><span class="pu">"&gt;</span><span class="t">Mumbai</span><span class="pu">&lt;/</span><span class="tg">option</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">select</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- Textarea: multi-line text --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">msg</span><span class="pu">"&gt;</span><span class="t">Message:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">textarea</span> <span class="at">id</span><span class="pu">="</span><span class="vl">msg</span><span class="pu">"</span> <span class="at">rows</span><span class="pu">="</span><span class="vl">3</span><span class="pu">"</span> <span class="at">cols</span><span class="pu">="</span><span class="vl">30</span><span class="pu">"</span>
+            <span class="at">placeholder</span><span class="pu">="</span><span class="vl">Write here...</span><span class="pu">"&gt;&lt;/</span><span class="tg">textarea</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- Range slider --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span><span class="pu">&gt;</span><span class="t">Rating:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">range</span><span class="pu">"</span> <span class="at">min</span><span class="pu">="</span><span class="vl">1</span><span class="pu">"</span> <span class="at">max</span><span class="pu">="</span><span class="vl">10</span><span class="pu">"</span> <span class="at">value</span><span class="pu">="</span><span class="vl">7</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- Colour picker --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span><span class="pu">&gt;</span><span class="t">Pick colour:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">color</span><span class="pu">"</span> <span class="at">value</span><span class="pu">="</span><span class="vl">#00d4ff</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- File upload --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span><span class="pu">&gt;</span><span class="t">Upload:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">file</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- Buttons --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">br</span><span class="pu">&gt;&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">submit</span><span class="pu">"</span> <span class="at">value</span><span class="pu">="</span><span class="vl">Submit</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">reset</span><span class="pu">"</span> <span class="at">value</span><span class="pu">="</span><span class="vl">Reset</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">button</span> <span class="at">type</span><span class="pu">="</span><span class="vl">button</span><span class="pu">"&gt;</span><span class="t">Plain Button</span><span class="pu">&lt;/</span><span class="tg">button</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;/</span><span class="tg">form</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:500px" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:14px;} label{font-weight:bold;} input,select,textarea{margin:4px 0 10px;display:block;padding:5px;} p{margin:8px 0 2px;font-weight:bold;} input[type=radio],input[type=checkbox]{display:inline;margin-right:4px;} input[type=submit],input[type=reset],button{display:inline;margin-right:6px;padding:7px 16px;cursor:pointer;}</style><form action="#" method="post"><label for="name">Name:</label><input type="text" id="name" name="name" placeholder="Your full name" required><label for="pwd">Password:</label><input type="password" id="pwd" name="pwd" placeholder="Enter password" required><label for="email">Email:</label><input type="email" id="email" name="email" placeholder="you@example.com"><label for="age">Age:</label><input type="number" id="age" min="1" max="120" style="width:80px"><label for="dob">Date of Birth:</label><input type="date" id="dob" name="dob"><p>Gender:</p><input type="radio" id="m" name="gender" value="male"><label for="m" style="font-weight:normal">Male</label> <input type="radio" id="f" name="gender" value="female"><label for="f" style="font-weight:normal">Female</label><p>Skills:</p><input type="checkbox" id="html" name="skills"><label for="html" style="font-weight:normal">HTML</label> <input type="checkbox" id="css" name="skills" checked><label for="css" style="font-weight:normal">CSS (pre-checked)</label><label for="city">City:</label><select id="city" name="city"><option value="">-- Select --</option><option value="chennai">Chennai</option><option value="delhi" selected>Delhi</option><option value="mumbai">Mumbai</option></select><label for="msg">Message:</label><textarea id="msg" rows="3" cols="30" placeholder="Write here..."></textarea><label>Rating:</label><input type="range" min="1" max="10" value="7" style="display:block"><label>Pick colour:</label><input type="color" value="#00d4ff" style="display:block;height:35px;width:60px"><label>Upload:</label><input type="file"><br><input type="submit" value="Submit"><input type="reset" value="Reset"><button type="button">Plain Button</button></form>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 10 — SEMANTIC TAGS
+══════════════════════════════════════ -->
+<div class="chapter" id="ch9">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 10</div>
+    <h2>Semantic HTML Tags</h2>
+    <p class="chapter-desc">Semantic tags describe the <em>purpose</em> of content — not just its appearance. They help search engines understand your page structure and improve accessibility for screen readers.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🏛</div><h3>Page Layout with Semantic Tags</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;header&gt;</strong> = Top section: site logo, nav, tagline.<br>
+        <strong>&lt;nav&gt;</strong> = Navigation links (menu).<br>
+        <strong>&lt;main&gt;</strong> = Main content of the page. Only <em>one</em> per page.<br>
+        <strong>&lt;section&gt;</strong> = A thematic group of content with its own heading.<br>
+        <strong>&lt;article&gt;</strong> = Self-contained content (blog post, news article).<br>
+        <strong>&lt;aside&gt;</strong> = Side content (ads, related links, author bio).<br>
+        <strong>&lt;footer&gt;</strong> = Bottom: copyright, social links, contact.<br>
+        <strong>&lt;figure&gt; + &lt;figcaption&gt;</strong> = Image with a caption.<br>
+        <strong>&lt;details&gt; + &lt;summary&gt;</strong> = Expandable/collapsible section (no JS needed!).
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="pu">&lt;</span><span class="tg">header</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">h1</span><span class="pu">&gt;</span><span class="t">My Blog</span><span class="pu">&lt;/</span><span class="tg">h1</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">nav</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">#</span><span class="pu">"&gt;</span><span class="t">Home</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">#</span><span class="pu">"&gt;</span><span class="t">About</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">nav</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">header</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">main</span><span class="pu">&gt;</span>
+
+  <span class="pu">&lt;</span><span class="tg">section</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">h2</span><span class="pu">&gt;</span><span class="t">Latest Posts</span><span class="pu">&lt;/</span><span class="tg">h2</span><span class="pu">&gt;</span>
+
+    <span class="pu">&lt;</span><span class="tg">article</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">h3</span><span class="pu">&gt;</span><span class="t">Post Title</span><span class="pu">&lt;/</span><span class="tg">h3</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Article body text goes here.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">article</span><span class="pu">&gt;</span>
+
+  <span class="pu">&lt;/</span><span class="tg">section</span><span class="pu">&gt;</span>
+
+  <span class="pu">&lt;</span><span class="tg">aside</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">h3</span><span class="pu">&gt;</span><span class="t">About the Author</span><span class="pu">&lt;/</span><span class="tg">h3</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Jane Doe, web developer.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">aside</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;/</span><span class="tg">main</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Figure with caption --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">figure</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">img</span> <span class="at">src</span><span class="pu">="</span><span class="vl">https://picsum.photos/200/80</span><span class="pu">"</span>
+       <span class="at">alt</span><span class="pu">="</span><span class="vl">Sample</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">figcaption</span><span class="pu">&gt;</span><span class="t">Fig 1: A sample image</span><span class="pu">&lt;/</span><span class="tg">figcaption</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">figure</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Collapsible (no JS needed!) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">details</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">summary</span><span class="pu">&gt;</span><span class="t">Click to expand FAQ</span><span class="pu">&lt;/</span><span class="tg">summary</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Answer text revealed here!</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">details</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">footer</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">© 2024 My Blog</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">footer</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:380px" srcdoc='<style>body{font-family:Arial;font-size:14px;margin:0;}header{background:#2c3e50;color:white;padding:10px 14px;}header h1{margin:0;font-size:1.1rem;}nav a{color:#aef;margin-right:12px;text-decoration:none;}main{padding:10px 14px;}section{border:1px solid #ddd;border-radius:6px;padding:10px;margin-bottom:10px;}article{background:#f9f9f9;padding:8px;border-radius:4px;margin-top:8px;}aside{background:#fff8e1;border-left:3px solid orange;padding:8px 12px;border-radius:4px;}figure{margin:10px 14px;}figcaption{font-size:12px;color:#666;margin-top:4px;}details{margin:10px 14px;border:1px solid #ccc;border-radius:4px;padding:8px;}summary{cursor:pointer;font-weight:bold;}footer{background:#2c3e50;color:white;text-align:center;padding:8px;font-size:13px;}</style><header><h1>My Blog</h1><nav><a href="#">Home</a><a href="#">About</a></nav></header><main><section><h2>Latest Posts</h2><article><h3>Post Title</h3><p>Article body text goes here.</p></article></section><aside><h3>About the Author</h3><p>Jane Doe, web developer.</p></aside></main><figure><img src="https://picsum.photos/200/80" alt="Sample"><figcaption>Fig 1: A sample image</figcaption></figure><details><summary>Click to expand FAQ</summary><p>Answer text revealed here!</p></details><footer><p>© 2024 My Blog</p></footer>'></iframe>
+        </div>
+      </div>
+      <div class="tip"><strong>💡 Why semantic tags?</strong> Using <code>&lt;header&gt;</code> instead of <code>&lt;div id="header"&gt;</code> tells Google and screen readers "this is the header". It makes your code readable, accessible, and better for SEO — all at once.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 11 — DIV SPAN CLASS
+══════════════════════════════════════ -->
+<div class="chapter" id="ch10">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 11</div>
+    <h2>Div, Span, ID & Class</h2>
+    <p class="chapter-desc"><code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> are generic containers with no visual meaning. They are used as hooks for CSS styling and JavaScript. <code>id</code> and <code>class</code> are how you target them.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">📦</div><h3>Block vs Inline Containers</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;div&gt;</strong> = Block element — takes the full width, starts on a new line. Used to group large sections.<br>
+        <strong>&lt;span&gt;</strong> = Inline element — only as wide as its content, stays in line with text. Used to style specific words.<br>
+        <strong>id="name"</strong> = Unique identifier. Only ONE element per page can have a given id. CSS: <code>#header</code>. JS: <code>getElementById("header")</code>.<br>
+        <strong>class="name"</strong> = Reusable label. MANY elements can share a class. CSS: <code>.card</code>.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="pu">&lt;</span><span class="tg">style</span><span class="pu">&gt;</span>
+  <span class="cm">/* Target by id (unique, one per page) */</span>
+  <span class="nr">#hero</span> <span class="pu">{</span> <span class="t">background:#2c3e50; color:white; padding:20px; </span><span class="pu">}</span>
+
+  <span class="cm">/* Target by class (many elements) */</span>
+  <span class="nr">.card</span> <span class="pu">{</span> <span class="t">border:1px solid #ccc; padding:12px; margin:8px; </span><span class="pu">}</span>
+
+  <span class="cm">/* Span: style specific inline text */</span>
+  <span class="nr">.highlight</span> <span class="pu">{</span> <span class="t">background:yellow; font-weight:bold; </span><span class="pu">}</span>
+<span class="pu">&lt;/</span><span class="tg">style</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- div with id (unique) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">div</span> <span class="at">id</span><span class="pu">="</span><span class="vl">hero</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">h2</span><span class="pu">&gt;</span><span class="t">Hero Section</span><span class="pu">&lt;/</span><span class="tg">h2</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Welcome to my site.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">div</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Multiple divs sharing same class --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">div</span> <span class="at">class</span><span class="pu">="</span><span class="vl">card</span><span class="pu">"&gt;</span><span class="t">Card One content</span><span class="pu">&lt;/</span><span class="tg">div</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">div</span> <span class="at">class</span><span class="pu">="</span><span class="vl">card</span><span class="pu">"&gt;</span><span class="t">Card Two content</span><span class="pu">&lt;/</span><span class="tg">div</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Multiple classes on one element --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">div</span> <span class="at">class</span><span class="pu">="</span><span class="vl">card highlight</span><span class="pu">"&gt;</span>
+  <span class="t">Card with TWO classes</span>
+<span class="pu">&lt;/</span><span class="tg">div</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- span: styles words inside a paragraph --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">The sky is
+  </span><span class="pu">&lt;</span><span class="tg">span</span> <span class="at">class</span><span class="pu">="</span><span class="vl">highlight</span><span class="pu">"&gt;</span><span class="t">bright blue</span><span class="pu">&lt;/</span><span class="tg">span</span><span class="pu">&gt;</span>
+<span class="t">today.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:280px" srcdoc='<style>#hero{background:#2c3e50;color:white;padding:16px;} .card{border:1px solid #ccc;padding:10px;margin:8px;border-radius:4px;font-family:Arial;font-size:14px;} .highlight{background:yellow;font-weight:bold;} body{font-family:Arial;font-size:14px;}</style><div id="hero"><h2>Hero Section</h2><p>Welcome to my site.</p></div><div class="card">Card One content</div><div class="card">Card Two content</div><div class="card highlight">Card with TWO classes</div><p>The sky is <span class="highlight">bright blue</span> today.</p>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 12 — AUDIO & VIDEO
+══════════════════════════════════════ -->
+<div class="chapter" id="ch11">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 12</div>
+    <h2>Audio & Video</h2>
+    <p class="chapter-desc">HTML5 introduced native audio and video support. No plugins needed — the browser plays media directly.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🎬</div><h3>Audio & Video Tags with Controls</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;audio&gt;</strong> = Embeds an audio player. Attributes: <code>controls</code> (show play/pause), <code>autoplay</code> (play on load), <code>loop</code> (repeat), <code>muted</code>.<br>
+        <strong>&lt;video&gt;</strong> = Embeds a video player. Same attributes as audio + <code>width</code>, <code>height</code>, <code>poster</code> (thumbnail image).<br>
+        <strong>&lt;source&gt;</strong> = Specify multiple file formats for browser compatibility (some support MP4, others WebM, etc.).<br>
+        The text inside (between tags) is shown only in browsers that don't support the element — fallback text.
+      </div>
+      <div class="split full">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="cm">&lt;!-- AUDIO PLAYER --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">audio</span> <span class="at">controls</span><span class="pu">&gt;</span>
+  <span class="cm">&lt;!-- source: specify the audio file + format --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">source</span> <span class="at">src</span><span class="pu">="</span><span class="vl">audio/song.mp3</span><span class="pu">"</span> <span class="at">type</span><span class="pu">="</span><span class="vl">audio/mpeg</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">source</span> <span class="at">src</span><span class="pu">="</span><span class="vl">audio/song.ogg</span><span class="pu">"</span> <span class="at">type</span><span class="pu">="</span><span class="vl">audio/ogg</span><span class="pu">"&gt;</span>
+  <span class="cm">&lt;!-- Fallback text if browser can't play audio --&gt;</span>
+  <span class="t">Your browser does not support audio.</span>
+<span class="pu">&lt;/</span><span class="tg">audio</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Audio with extra options --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">audio</span> <span class="at">controls</span> <span class="at">loop</span> <span class="at">muted</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">source</span> <span class="at">src</span><span class="pu">="</span><span class="vl">audio/background.mp3</span><span class="pu">"</span> <span class="at">type</span><span class="pu">="</span><span class="vl">audio/mpeg</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">audio</span><span class="pu">&gt;</span>
+
+
+<span class="cm">&lt;!-- VIDEO PLAYER --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">video</span>
+  <span class="at">width</span><span class="pu">="</span><span class="vl">400</span><span class="pu">"</span>
+  <span class="at">controls</span>
+  <span class="at">poster</span><span class="pu">="</span><span class="vl">images/thumbnail.jpg</span><span class="pu">"&gt;</span>
+  <span class="cm">&lt;!-- Multiple formats for browser compatibility --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">source</span> <span class="at">src</span><span class="pu">="</span><span class="vl">video/clip.mp4</span><span class="pu">"</span> <span class="at">type</span><span class="pu">="</span><span class="vl">video/mp4</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">source</span> <span class="at">src</span><span class="pu">="</span><span class="vl">video/clip.webm</span><span class="pu">"</span> <span class="at">type</span><span class="pu">="</span><span class="vl">video/webm</span><span class="pu">"&gt;</span>
+  <span class="t">Your browser does not support video.</span>
+<span class="pu">&lt;/</span><span class="tg">video</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Video: autoplay + muted (required by browsers) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">video</span> <span class="at">width</span><span class="pu">="</span><span class="vl">400</span><span class="pu">"</span> <span class="at">autoplay</span> <span class="at">muted</span> <span class="at">loop</span> <span class="at">controls</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">source</span> <span class="at">src</span><span class="pu">="</span><span class="vl">video/demo.mp4</span><span class="pu">"</span> <span class="at">type</span><span class="pu">="</span><span class="vl">video/mp4</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">video</span><span class="pu">&gt;</span></pre>
+        </div>
+      </div>
+      <div class="warn"><strong>⚠️ autoplay</strong> is blocked in most browsers unless <strong>muted</strong> is also set. This is to stop annoying auto-playing audio on websites.</div>
+      <div class="tip"><strong>💡 YouTube Embed:</strong> To embed a YouTube video, use an <code>&lt;iframe&gt;</code> (see Chapter 13) with YouTube's embed URL — not the <code>&lt;video&gt;</code> tag.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 13 — IFRAMES
+══════════════════════════════════════ -->
+<div class="chapter" id="ch12">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 13</div>
+    <h2>Iframes — Embed Other Pages</h2>
+    <p class="chapter-desc">An <code>&lt;iframe&gt;</code> (inline frame) embeds another webpage inside your page. Used to embed YouTube videos, Google Maps, social media widgets, and more.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🌐</div><h3>Iframe Examples</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>src</strong> = The URL of the page to embed.<br>
+        <strong>width / height</strong> = Size of the frame in pixels or %.<br>
+        <strong>title</strong> = Accessibility description (required!).<br>
+        <strong>allowfullscreen</strong> = Lets YouTube/Maps go fullscreen.<br>
+        <strong>frameborder="0"</strong> = Removes the default border around the frame.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="cm">&lt;!-- Embed a YouTube video --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">iframe</span>
+  <span class="at">src</span><span class="pu">="</span><span class="vl">https://www.youtube.com/embed/VIDEO_ID</span><span class="pu">"</span>
+  <span class="at">width</span><span class="pu">="</span><span class="vl">400</span><span class="pu">"</span>
+  <span class="at">height</span><span class="pu">="</span><span class="vl">225</span><span class="pu">"</span>
+  <span class="at">title</span><span class="pu">="</span><span class="vl">My YouTube Video</span><span class="pu">"</span>
+  <span class="at">allowfullscreen</span>
+  <span class="at">frameborder</span><span class="pu">="</span><span class="vl">0</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">iframe</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Embed a Google Map --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">iframe</span>
+  <span class="at">src</span><span class="pu">="</span><span class="vl">https://www.google.com/maps/embed?pb=YOUR_MAP_KEY</span><span class="pu">"</span>
+  <span class="at">width</span><span class="pu">="</span><span class="vl">400</span><span class="pu">"</span>
+  <span class="at">height</span><span class="pu">="</span><span class="vl">250</span><span class="pu">"</span>
+  <span class="at">title</span><span class="pu">="</span><span class="vl">Location Map</span><span class="pu">"</span>
+  <span class="at">frameborder</span><span class="pu">="</span><span class="vl">0</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">iframe</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Embed any website (if they allow it) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">iframe</span>
+  <span class="at">src</span><span class="pu">="</span><span class="vl">https://example.com</span><span class="pu">"</span>
+  <span class="at">width</span><span class="pu">="</span><span class="vl">100%</span><span class="pu">"</span>
+  <span class="at">height</span><span class="pu">="</span><span class="vl">300</span><span class="pu">"</span>
+  <span class="at">title</span><span class="pu">="</span><span class="vl">Embedded Site</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">iframe</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">OUTPUT (example.com embedded)</span></div>
+          <iframe class="output-frame" style="min-height:240px" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:14px;}</style><p><strong>YouTube embed example:</strong></p><div style="width:100%;background:#000;height:120px;display:flex;align-items:center;justify-content:center;border-radius:4px;color:white;">▶ YouTube player would appear here<br><small>(replace VIDEO_ID with actual id)</small></div><br><p><strong>Map embed example:</strong></p><div style="width:100%;background:#e8f5e9;height:100px;display:flex;align-items:center;justify-content:center;border:2px dashed #aaa;border-radius:4px;color:#555;">🗺 Google Map would appear here</div>'></iframe>
+        </div>
+      </div>
+      <div class="warn"><strong>⚠️ Security:</strong> Many websites block embedding via <code>X-Frame-Options</code> headers. Google, Facebook, and most major sites refuse to be embedded. YouTube and Google Maps provide special embed URLs specifically for iframes.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 14 — HTML ENTITIES
+══════════════════════════════════════ -->
+<div class="chapter" id="ch13">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 14</div>
+    <h2>HTML Entities & Special Characters</h2>
+    <p class="chapter-desc">Some characters have special meaning in HTML (like <code>&lt;</code> and <code>&gt;</code>). To display them as text, you use entity codes. Also used for symbols like ©, ₹, ♥.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🔣</div><h3>Common HTML Entities</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        HTML entities start with <strong>&amp;</strong> and end with <strong>;</strong><br>
+        <strong>&amp;lt;</strong> = &lt; (less-than) | <strong>&amp;gt;</strong> = &gt; (greater-than) — used to show HTML code as text<br>
+        <strong>&amp;amp;</strong> = &amp; (ampersand) | <strong>&amp;nbsp;</strong> = non-breaking space (forces a space that won't wrap)<br>
+        <strong>&amp;copy;</strong> = © | <strong>&amp;reg;</strong> = ® | <strong>&amp;trade;</strong> = ™ | <strong>&amp;euro;</strong> = € | <strong>&amp;hearts;</strong> = ♥
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">CODE</span></div>
+          <pre class="code-block"><span class="cm">&lt;!-- Show < and > as visible text --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">HTML tag looks like: &amp;lt;p&amp;gt;</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Copyright, trademark, registered --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">&amp;copy; 2024 My Company</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Brand&amp;reg; &amp;nbsp; Brand&amp;trade;</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Currency symbols --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Price: &amp;euro;99 or &amp;pound;85</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Fun symbols --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">I &amp;hearts; HTML &amp;star; Web Dev</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Non-breaking space: words stay together --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Hello&amp;nbsp;&amp;nbsp;&amp;nbsp;World</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Maths --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">5 &amp;lt; 10 &amp;amp; 10 &amp;gt; 5</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">&amp;frac12; &amp;frac14; &amp;frac34;</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">OUTPUT</span></div>
+          <iframe class="output-frame" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:15px;line-height:2;}</style><p>HTML tag looks like: &lt;p&gt;</p><p>&copy; 2024 My Company</p><p>Brand&reg; &nbsp; Brand&trade;</p><p>Price: &euro;99 or &pound;85</p><p>I &hearts; HTML &#9733; Web Dev</p><p>Hello&nbsp;&nbsp;&nbsp;World</p><p>5 &lt; 10 &amp; 10 &gt; 5</p><p>&frac12; &frac14; &frac34;</p>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+  CH 15 — MINI PROJECT
+══════════════════════════════════════ -->
+<div class="chapter" id="ch14">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter 15 — Final Project</div>
+    <h2>🚀 Mini Project: Full Portfolio Page</h2>
+    <p class="chapter-desc">This combines every concept from the course into one complete, real webpage. Study the code structure, then personalise it with your own name and content.</p>
+  </div>
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🎓</div><h3>Complete Portfolio — All Concepts Combined</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        This project uses: <strong>DOCTYPE + head + meta</strong> → <strong>semantic layout (header/main/footer)</strong> → <strong>nav links</strong> → <strong>h1–h3 hierarchy</strong> → <strong>images with alt</strong> → <strong>nested lists</strong> → <strong>table with colspan+rowspan</strong> → <strong>contact form with all input types</strong> → <strong>entities</strong> → <strong>footer with copyright</strong>.
+      </div>
+      <div class="split full">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label code-lbl">COMPLETE PORTFOLIO HTML</span></div>
+          <pre class="code-block" style="max-height:500px;overflow-y:auto;"><span class="pu">&lt;!</span><span class="kw">DOCTYPE</span> <span class="t">html</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">html</span> <span class="at">lang</span><span class="pu">="</span><span class="vl">en</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;</span><span class="tg">head</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">meta</span> <span class="at">charset</span><span class="pu">="</span><span class="vl">UTF-8</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">meta</span> <span class="at">name</span><span class="pu">="</span><span class="vl">viewport</span><span class="pu">"</span> <span class="at">content</span><span class="pu">="</span><span class="vl">width=device-width,initial-scale=1</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">meta</span> <span class="at">name</span><span class="pu">="</span><span class="vl">description</span><span class="pu">"</span> <span class="at">content</span><span class="pu">="</span><span class="vl">Portfolio of Jane Doe, web developer</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">title</span><span class="pu">&gt;</span><span class="t">Jane Doe — Portfolio</span><span class="pu">&lt;/</span><span class="tg">title</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">style</span><span class="pu">&gt;</span>
+    <span class="t">* { box-sizing: border-box; margin: 0; padding: 0; }</span>
+    <span class="t">body { font-family: Arial, sans-serif; color: #333; }</span>
+    <span class="t">header { background: #1a1a2e; color: white; padding: 30px 40px; }</span>
+    <span class="t">nav a { color: #aef; margin: 0 12px; text-decoration: none; font-weight: bold; }</span>
+    <span class="t">main { max-width: 900px; margin: auto; padding: 30px 20px; }</span>
+    <span class="t">section { margin-bottom: 40px; }</span>
+    <span class="t">h2 { border-bottom: 2px solid #1a1a2e; padding-bottom: 6px; margin-bottom: 14px; }</span>
+    <span class="t">table { width: 100%; border-collapse: collapse; font-size: 14px; }</span>
+    <span class="t">th, td { border: 1px solid #ccc; padding: 9px 12px; text-align: left; }</span>
+    <span class="t">th { background: #1a1a2e; color: white; }</span>
+    <span class="t">form label { display: block; margin-top: 12px; font-weight: bold; }</span>
+    <span class="t">form input, form select, form textarea</span>
+    <span class="t">       { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px; }</span>
+    <span class="t">form input[type=radio],</span>
+    <span class="t">form input[type=checkbox] { width: auto; }</span>
+    <span class="t">button { background: #1a1a2e; color: white; padding: 10px 24px;</span>
+    <span class="t">         border: none; border-radius: 4px; cursor: pointer; margin-top: 14px; }</span>
+    <span class="t">footer { background: #1a1a2e; color: #aaa; text-align: center; padding: 16px; }</span>
+  <span class="pu">&lt;/</span><span class="tg">style</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">head</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">body</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- ===== HEADER + NAV ===== --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">header</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">h1</span><span class="pu">&gt;</span><span class="t">Jane Doe</span><span class="pu">&lt;/</span><span class="tg">h1</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Web Developer &amp;bull; Designer &amp;bull; Learner</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">nav</span> <span class="at">style</span><span class="pu">="</span><span class="vl">margin-top:12px</span><span class="pu">"&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">#about</span><span class="pu">"&gt;</span><span class="t">About</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">#skills</span><span class="pu">"&gt;</span><span class="t">Skills</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">#projects</span><span class="pu">"&gt;</span><span class="t">Projects</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">#contact</span><span class="pu">"&gt;</span><span class="t">Contact</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">nav</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">header</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">main</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- ===== ABOUT ===== --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">section</span> <span class="at">id</span><span class="pu">="</span><span class="vl">about</span><span class="pu">"&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">h2</span><span class="pu">&gt;</span><span class="t">About Me</span><span class="pu">&lt;/</span><span class="tg">h2</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">figure</span> <span class="at">style</span><span class="pu">="</span><span class="vl">float:left;margin:0 16px 8px 0</span><span class="pu">"&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">img</span> <span class="at">src</span><span class="pu">="</span><span class="vl">https://picsum.photos/100/100?grayscale</span><span class="pu">"</span>
+           <span class="at">alt</span><span class="pu">="</span><span class="vl">Jane Doe profile photo</span><span class="pu">"</span>
+           <span class="at">width</span><span class="pu">="</span><span class="vl">100</span><span class="pu">"</span>
+           <span class="at">style</span><span class="pu">="</span><span class="vl">border-radius:50%</span><span class="pu">"&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">figcaption</span> <span class="at">style</span><span class="pu">="</span><span class="vl">font-size:12px;text-align:center;color:#777</span><span class="pu">"&gt;</span><span class="t">Jane Doe</span><span class="pu">&lt;/</span><span class="tg">figcaption</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">figure</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Hi! I am </span><span class="pu">&lt;</span><span class="tg">strong</span><span class="pu">&gt;</span><span class="t">Jane Doe</span><span class="pu">&lt;/</span><span class="tg">strong</span><span class="pu">&gt;</span><span class="t">, a passionate web developer
+    from Chennai, India. I love building clean, user-friendly websites.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Currently learning:
+    </span><span class="pu">&lt;</span><span class="tg">em</span><span class="pu">&gt;</span><span class="t">HTML, CSS, and JavaScript</span><span class="pu">&lt;/</span><span class="tg">em</span><span class="pu">&gt;</span><span class="t">.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">div</span> <span class="at">style</span><span class="pu">="</span><span class="vl">clear:both</span><span class="pu">"&gt;&lt;/</span><span class="tg">div</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">section</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- ===== SKILLS (nested list) ===== --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">section</span> <span class="at">id</span><span class="pu">="</span><span class="vl">skills</span><span class="pu">"&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">h2</span><span class="pu">&gt;</span><span class="t">My Skills</span><span class="pu">&lt;/</span><span class="tg">h2</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">ul</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">Frontend</span>
+        <span class="pu">&lt;</span><span class="tg">ul</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">HTML5</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">CSS3</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">JavaScript</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+        <span class="pu">&lt;/</span><span class="tg">ul</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">Tools</span>
+        <span class="pu">&lt;</span><span class="tg">ul</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">VS Code</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">Git &amp;amp; GitHub</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+        <span class="pu">&lt;/</span><span class="tg">ul</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">ul</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">section</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- ===== PROJECTS (table + colspan/rowspan) ===== --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">section</span> <span class="at">id</span><span class="pu">="</span><span class="vl">projects</span><span class="pu">"&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">h2</span><span class="pu">&gt;</span><span class="t">Projects</span><span class="pu">&lt;/</span><span class="tg">h2</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">table</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">thead</span><span class="pu">&gt;</span>
+        <span class="pu">&lt;</span><span class="tg">tr</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">th</span><span class="pu">&gt;</span><span class="t">Project</span><span class="pu">&lt;/</span><span class="tg">th</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">th</span><span class="pu">&gt;</span><span class="t">Tech</span><span class="pu">&lt;/</span><span class="tg">th</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">th</span><span class="pu">&gt;</span><span class="t">Status</span><span class="pu">&lt;/</span><span class="tg">th</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">th</span><span class="pu">&gt;</span><span class="t">Link</span><span class="pu">&lt;/</span><span class="tg">th</span><span class="pu">&gt;</span>
+        <span class="pu">&lt;/</span><span class="tg">tr</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;/</span><span class="tg">thead</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">tbody</span><span class="pu">&gt;</span>
+        <span class="pu">&lt;</span><span class="tg">tr</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">Portfolio Site</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">HTML, CSS</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">Done &amp;check;</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">#</span><span class="pu">"&gt;</span><span class="t">View</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+        <span class="pu">&lt;/</span><span class="tg">tr</span><span class="pu">&gt;</span>
+        <span class="pu">&lt;</span><span class="tg">tr</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">td</span> <span class="at">rowspan</span><span class="pu">="</span><span class="vl">2</span><span class="pu">"&gt;</span><span class="t">Blog Site</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">HTML</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">Planning</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">&mdash;</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+        <span class="pu">&lt;/</span><span class="tg">tr</span><span class="pu">&gt;</span>
+        <span class="pu">&lt;</span><span class="tg">tr</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">CSS</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">Planning</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+          <span class="pu">&lt;</span><span class="tg">td</span><span class="pu">&gt;</span><span class="t">&mdash;</span><span class="pu">&lt;/</span><span class="tg">td</span><span class="pu">&gt;</span>
+        <span class="pu">&lt;/</span><span class="tg">tr</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;/</span><span class="tg">tbody</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">table</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">section</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- ===== CONTACT FORM ===== --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">section</span> <span class="at">id</span><span class="pu">="</span><span class="vl">contact</span><span class="pu">"&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">h2</span><span class="pu">&gt;</span><span class="t">Contact Me</span><span class="pu">&lt;/</span><span class="tg">h2</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Email: </span>
+      <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">mailto:jane@example.com</span><span class="pu">"&gt;</span>
+        <span class="t">jane@example.com</span>
+      <span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">form</span> <span class="at">action</span><span class="pu">="</span><span class="vl">#</span><span class="pu">"</span> <span class="at">method</span><span class="pu">="</span><span class="vl">post</span><span class="pu">"&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">cname</span><span class="pu">"&gt;</span><span class="t">Your Name</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">text</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">cname</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">name</span><span class="pu">"</span>
+             <span class="at">placeholder</span><span class="pu">="</span><span class="vl">Full name</span><span class="pu">"</span> <span class="at">required</span><span class="pu">&gt;</span>
+
+      <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">cemail</span><span class="pu">"&gt;</span><span class="t">Your Email</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">email</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">cemail</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">email</span><span class="pu">"</span>
+             <span class="at">placeholder</span><span class="pu">="</span><span class="vl">you@example.com</span><span class="pu">"</span> <span class="at">required</span><span class="pu">&gt;</span>
+
+      <span class="pu">&lt;</span><span class="tg">label</span><span class="pu">&gt;</span><span class="t">Subject:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">select</span> <span class="at">name</span><span class="pu">="</span><span class="vl">subject</span><span class="pu">"&gt;</span>
+        <span class="pu">&lt;</span><span class="tg">option</span><span class="pu">&gt;</span><span class="t">Job Offer</span><span class="pu">&lt;/</span><span class="tg">option</span><span class="pu">&gt;</span>
+        <span class="pu">&lt;</span><span class="tg">option</span><span class="pu">&gt;</span><span class="t">Project Collaboration</span><span class="pu">&lt;/</span><span class="tg">option</span><span class="pu">&gt;</span>
+        <span class="pu">&lt;</span><span class="tg">option</span><span class="pu">&gt;</span><span class="t">General Enquiry</span><span class="pu">&lt;/</span><span class="tg">option</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;/</span><span class="tg">select</span><span class="pu">&gt;</span>
+
+      <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">cmsg</span><span class="pu">"&gt;</span><span class="t">Message</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+      <span class="pu">&lt;</span><span class="tg">textarea</span> <span class="at">id</span><span class="pu">="</span><span class="vl">cmsg</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">msg</span><span class="pu">"</span>
+               <span class="at">rows</span><span class="pu">="</span><span class="vl">4</span><span class="pu">"</span> <span class="at">placeholder</span><span class="pu">="</span><span class="vl">Your message...</span><span class="pu">"</span> <span class="at">required</span>
+               <span class="pu">&gt;&lt;/</span><span class="tg">textarea</span><span class="pu">&gt;</span>
+
+      <span class="pu">&lt;</span><span class="tg">button</span> <span class="at">type</span><span class="pu">="</span><span class="vl">submit</span><span class="pu">"&gt;</span><span class="t">Send Message</span><span class="pu">&lt;/</span><span class="tg">button</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;/</span><span class="tg">form</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">section</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;/</span><span class="tg">main</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- ===== FOOTER ===== --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">footer</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">&amp;copy; 2024 Jane Doe. Built with &amp;hearts; using HTML.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">https://github.com</span><span class="pu">"</span>
+       <span class="at">target</span><span class="pu">="</span><span class="vl">_blank</span><span class="pu">"</span> <span class="at">style</span><span class="pu">="</span><span class="vl">color:#aef</span><span class="pu">"&gt;</span><span class="t">GitHub</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+    <span class="t"> &amp;bull; </span>
+    <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">https://linkedin.com</span><span class="pu">"</span>
+       <span class="at">target</span><span class="pu">="</span><span class="vl">_blank</span><span class="pu">"</span> <span class="at">style</span><span class="pu">="</span><span class="vl">color:#aef</span><span class="pu">"&gt;</span><span class="t">LinkedIn</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">footer</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;/</span><span class="tg">body</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">html</span><span class="pu">&gt;</span></pre>
+        </div>
+      </div>
+      <!-- LIVE PREVIEW -->
+      <div class="panel" style="margin-top:14px">
+        <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label out-lbl">🔴 LIVE PORTFOLIO PREVIEW</span></div>
+        <iframe class="output-frame" style="min-height:620px" srcdoc='<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jane Doe — Portfolio</title><style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;color:#333;}header{background:#1a1a2e;color:white;padding:30px 40px;}nav a{color:#aef;margin:0 12px;text-decoration:none;font-weight:bold;}main{max-width:900px;margin:auto;padding:30px 20px;}section{margin-bottom:40px;}h2{border-bottom:2px solid #1a1a2e;padding-bottom:6px;margin-bottom:14px;}table{width:100%;border-collapse:collapse;font-size:14px;}th,td{border:1px solid #ccc;padding:9px 12px;text-align:left;}th{background:#1a1a2e;color:white;}form label{display:block;margin-top:12px;font-weight:bold;}form input,form select,form textarea{width:100%;padding:8px;margin-top:4px;border:1px solid #ccc;border-radius:4px;}form input[type=radio],form input[type=checkbox]{width:auto;}button{background:#1a1a2e;color:white;padding:10px 24px;border:none;border-radius:4px;cursor:pointer;margin-top:14px;}footer{background:#1a1a2e;color:#aaa;text-align:center;padding:16px;font-size:13px;}</style></head><body><header><h1>Jane Doe</h1><p>Web Developer &bull; Designer &bull; Learner</p><nav style="margin-top:12px"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a></nav></header><main><section id="about"><h2>About Me</h2><figure style="float:left;margin:0 16px 8px 0"><img src="https://picsum.photos/100/100?grayscale" alt="Jane Doe profile photo" width="100" style="border-radius:50%"><figcaption style="font-size:12px;text-align:center;color:#777">Jane Doe</figcaption></figure><p>Hi! I am <strong>Jane Doe</strong>, a passionate web developer from Chennai, India. I love building clean, user-friendly websites.</p><p>Currently learning: <em>HTML, CSS, and JavaScript</em>.</p><div style="clear:both"></div></section><section id="skills"><h2>My Skills</h2><ul><li>Frontend<ul><li>HTML5</li><li>CSS3</li><li>JavaScript</li></ul></li><li>Tools<ul><li>VS Code</li><li>Git &amp; GitHub</li></ul></li></ul></section><section id="projects"><h2>Projects</h2><table><thead><tr><th>Project</th><th>Tech</th><th>Status</th><th>Link</th></tr></thead><tbody><tr><td>Portfolio Site</td><td>HTML, CSS</td><td>Done ✓</td><td><a href="#">View</a></td></tr><tr><td rowspan="2">Blog Site</td><td>HTML</td><td>Planning</td><td>&mdash;</td></tr><tr><td>CSS</td><td>Planning</td><td>&mdash;</td></tr></tbody></table></section><section id="contact"><h2>Contact Me</h2><p>Email: <a href="mailto:jane@example.com">jane@example.com</a></p><form action="#" method="post"><label for="cname">Your Name</label><input type="text" id="cname" name="name" placeholder="Full name" required><label for="cemail">Your Email</label><input type="email" id="cemail" name="email" placeholder="you@example.com" required><label>Subject:</label><select name="subject"><option>Job Offer</option><option>Project Collaboration</option><option>General Enquiry</option></select><label for="cmsg">Message</label><textarea id="cmsg" name="msg" rows="4" placeholder="Your message..." required></textarea><button type="submit">Send Message</button></form></section></main><footer><p>&copy; 2024 Jane Doe. Built with &hearts; using HTML.</p><p><a href="https://github.com" target="_blank" style="color:#aef">GitHub</a> &bull; <a href="https://linkedin.com" target="_blank" style="color:#aef">LinkedIn</a></p></footer></body></html>'></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .main -->
+</div><!-- end .layout -->
+
+<button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<script>
+function show(idx, el) {
+  document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('ch' + idx).classList.add('active');
+  el.classList.add('active');
+  document.querySelector('.main').scrollTo({top:0,behavior:'smooth'});
+  // Close sidebar on mobile
+  if(window.innerWidth <= 900) {
+    document.getElementById('sidebar').classList.remove('open');
+  }
+}
+</script>
+</body>
+</html>
