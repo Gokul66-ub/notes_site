@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -334,6 +335,34 @@ pre.code-block::-webkit-scrollbar-thumb { background:var(--border);border-radius
 .main::-webkit-scrollbar-track { background:var(--bg); }
 .main::-webkit-scrollbar-thumb { background:var(--border);border-radius:4px; }
 
+/* ── EXTRA PANEL LABEL COLOURS (new chapters) ── */
+.panel-label.cl  { color:var(--accent); }
+.panel-label.ol  { color:var(--accent3); }
+
+/* ── pre.cb (alias for pre.code-block used in new chapters) ── */
+pre.cb {
+  background:#070c16;
+  padding:18px;
+  overflow-x:auto;
+  margin:0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.82rem;
+  line-height:1.7;
+  white-space:pre;
+}
+pre.cb::-webkit-scrollbar { height:4px; }
+pre.cb::-webkit-scrollbar-thumb { background:var(--border);border-radius:4px; }
+
+/* ── SIDEBAR GROUP LABEL ── */
+.sb-group {
+  padding:14px 20px 6px;
+  font-size:0.68rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent4);
+  border-top:1px solid var(--border);
+  margin-top:8px;
+}
+
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   .layout { grid-template-columns:1fr; }
@@ -397,6 +426,23 @@ pre.code-block::-webkit-scrollbar-thumb { background:var(--border);border-radius
   <div class="nav-item" onclick="show(12,this)"><span class="nav-num">13</span> Iframes</div>
   <div class="nav-item" onclick="show(13,this)"><span class="nav-num">14</span> HTML Entities</div>
   <div class="nav-item" onclick="show(14,this)"><span class="nav-num">15</span> 🚀 Mini Project</div>
+
+  <div class="sb-group">Missing Topics</div>
+  <div class="nav-item" onclick="go(100,this)"><span class="nav-num">A</span>Styling Attribute</div>
+  <div class="nav-item" onclick="go(101,this)"><span class="nav-num">B</span>Bold / Strong Tag</div>
+  <div class="nav-item" onclick="go(102,this)"><span class="nav-num">C</span>i and em Tag</div>
+  <div class="nav-item" onclick="go(103,this)"><span class="nav-num">D</span>mark Tag</div>
+  <div class="nav-item" onclick="go(104,this)"><span class="nav-num">E</span>del &amp; ins Tags</div>
+  <div class="nav-item" onclick="go(105,this)"><span class="nav-num">F</span>sub &amp; sup Tags</div>
+  <div class="nav-item" onclick="go(106,this)"><span class="nav-num">G</span>abbr Tag</div>
+  <div class="nav-item" onclick="go(107,this)"><span class="nav-num">H</span>target Attribute</div>
+  <div class="nav-item" onclick="go(108,this)"><span class="nav-num">I</span>Image as a Link</div>
+  <div class="nav-item" onclick="go(109,this)"><span class="nav-num">J</span>class &amp; id</div>
+  <div class="nav-item" onclick="go(110,this)"><span class="nav-num">K</span>iframe Tag</div>
+  <div class="nav-item" onclick="go(111,this)"><span class="nav-num">L</span>Forms</div>
+  <div class="nav-item" onclick="go(112,this)"><span class="nav-num">M</span>fieldset &amp; legend</div>
+  <div class="nav-item" onclick="go(113,this)"><span class="nav-num">N</span>mailto &amp; tel Links</div>
+  <div class="nav-item" onclick="go(114,this)"><span class="nav-num">O</span>Favicon</div>
 </nav>
 
 <!-- MAIN -->
@@ -728,7 +774,7 @@ pre.code-block::-webkit-scrollbar-thumb { background:var(--border);border-radius
 <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">#contact</span><span class="pu">"&gt;</span><span class="t">Jump to Contact</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
 
 <span class="cm">&lt;!-- Email link --&gt;</span>
-<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">mailto:jane@email.com</span><span class="pu">"&gt;</span><span class="t">Email Me</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">mailto:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c0aaa1aea580a5ada1a9aceea3afad">[email&#160;protected]</a></span><span class="pu">"&gt;</span><span class="t">Email Me</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
 
 <span class="cm">&lt;!-- Phone link (works on mobile) --&gt;</span>
 <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">tel:+911234567890</span><span class="pu">"&gt;</span><span class="t">Call Me</span><span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
@@ -1492,8 +1538,8 @@ pre.code-block::-webkit-scrollbar-thumb { background:var(--border);border-radius
   <span class="pu">&lt;</span><span class="tg">section</span> <span class="at">id</span><span class="pu">="</span><span class="vl">contact</span><span class="pu">"&gt;</span>
     <span class="pu">&lt;</span><span class="tg">h2</span><span class="pu">&gt;</span><span class="t">Contact Me</span><span class="pu">&lt;/</span><span class="tg">h2</span><span class="pu">&gt;</span>
     <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Email: </span>
-      <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">mailto:jane@example.com</span><span class="pu">"&gt;</span>
-        <span class="t">jane@example.com</span>
+      <span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">mailto:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcb6bdb2b99cb9a4bdb1acb0b9f2bfb3b1">[email&#160;protected]</a></span><span class="pu">"&gt;</span>
+        <span class="t"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5bfb4bbb095b0adb4b8a5b9b0fbb6bab8">[email&#160;protected]</a></span>
       <span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
     <span class="pu">&lt;</span><span class="tg">form</span> <span class="at">action</span><span class="pu">="</span><span class="vl">#</span><span class="pu">"</span> <span class="at">method</span><span class="pu">="</span><span class="vl">post</span><span class="pu">"&gt;</span>
       <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">cname</span><span class="pu">"&gt;</span><span class="t">Your Name</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
@@ -1502,7 +1548,7 @@ pre.code-block::-webkit-scrollbar-thumb { background:var(--border);border-radius
 
       <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">cemail</span><span class="pu">"&gt;</span><span class="t">Your Email</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
       <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">email</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">cemail</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">email</span><span class="pu">"</span>
-             <span class="at">placeholder</span><span class="pu">="</span><span class="vl">you@example.com</span><span class="pu">"</span> <span class="at">required</span><span class="pu">&gt;</span>
+             <span class="at">placeholder</span><span class="pu">="</span><span class="vl"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f66706a5f7a677e726f737a317c7072">[email&#160;protected]</a></span><span class="pu">"</span> <span class="at">required</span><span class="pu">&gt;</span>
 
       <span class="pu">&lt;</span><span class="tg">label</span><span class="pu">&gt;</span><span class="t">Subject:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
       <span class="pu">&lt;</span><span class="tg">select</span> <span class="at">name</span><span class="pu">="</span><span class="vl">subject</span><span class="pu">"&gt;</span>
@@ -1547,22 +1593,1033 @@ pre.code-block::-webkit-scrollbar-thumb { background:var(--border);border-radius
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════
+  CH A — STYLING ATTRIBUTE
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch100">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — Styling Attribute</div>
+    <h2>Styling Attribute (Inline CSS)</h2>
+    <p class="chapter-desc">The <code>style</code> attribute lets you write CSS directly inside any HTML tag. Called "inline CSS" — quick and useful for learning, but external stylesheets are better for big projects.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🎨</div><h3>style="" — How It Works</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>Syntax:</strong> <code>style="property: value; property: value;"</code><br><br>
+        • Multiple properties are separated by a <strong>semicolon</strong> <code>;</code><br>
+        • Property and value are separated by a <strong>colon</strong> <code>:</code><br><br>
+        <strong>Common properties:</strong><br>
+        <code>color</code> = text colour &nbsp;|&nbsp; <code>background-color</code> = background colour<br>
+        <code>font-size</code> = text size (px, %, em) &nbsp;|&nbsp; <code>font-family</code> = font name<br>
+        <code>font-weight</code> = bold/normal &nbsp;|&nbsp; <code>text-align</code> = left/center/right<br>
+        <code>border</code> = border style &nbsp;|&nbsp; <code>padding</code> = inside spacing &nbsp;|&nbsp; <code>margin</code> = outside spacing
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="cm">&lt;!-- Single property --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span> <span class="at">style</span><span class="pu">="</span><span class="vl">color: red;</span><span class="pu">"&gt;</span><span class="t">Red text</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Multiple properties (separate with ;) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span> <span class="at">style</span><span class="pu">="</span><span class="vl">color: white;
+         background-color: navy;
+         font-size: 18px;
+         padding: 10px;</span><span class="pu">"&gt;</span>
+  <span class="t">Navy background with white text</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Centered heading in green --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">h2</span> <span class="at">style</span><span class="pu">="</span><span class="vl">text-align: center;
+          color: green;</span><span class="pu">"&gt;</span>
+  <span class="t">Centred Heading</span>
+<span class="pu">&lt;/</span><span class="tg">h2</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Custom font --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span> <span class="at">style</span><span class="pu">="</span><span class="vl">font-family: Georgia;
+         font-size: 20px;</span><span class="pu">"&gt;</span>
+  <span class="t">Custom font paragraph</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Box with border --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">div</span> <span class="at">style</span><span class="pu">="</span><span class="vl">border: 2px solid orange;
+            background-color: lightyellow;
+            padding: 12px;
+            margin: 8px 0;</span><span class="pu">"&gt;</span>
+  <span class="t">Box with border and background</span>
+<span class="pu">&lt;/</span><span class="tg">div</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Apply style to any tag --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">h3</span> <span class="at">style</span><span class="pu">="</span><span class="vl">color: purple; font-size: 14px;</span><span class="pu">"&gt;</span>
+  <span class="t">Small purple heading</span>
+<span class="pu">&lt;/</span><span class="tg">h3</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">LIVE OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:280px" srcdoc='<style>body{padding:12px;font-family:Arial;}</style><p style="color:red;">Red text</p><p style="color:white;background-color:navy;font-size:18px;padding:10px;">Navy background with white text</p><h2 style="text-align:center;color:green;">Centred Heading</h2><p style="font-family:Georgia;font-size:20px;">Custom font paragraph</p><div style="border:2px solid orange;background-color:lightyellow;padding:12px;margin:8px 0;">Box with border and background</div><h3 style="color:purple;font-size:14px;">Small purple heading</h3>'></iframe>
+        </div>
+      </div>
+      <div class="warn"><strong>⚠️ Inline styles</strong> are great for quick tests, but for real projects use a separate <code>style.css</code> file. Keeping CSS separate from HTML makes your code much easier to maintain and update.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH B — BOLD / STRONG
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch101">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — Bold / Strong Tag</div>
+    <h2>Bold &amp; Strong Tag</h2>
+    <p class="chapter-desc">Both <code>&lt;b&gt;</code> and <code>&lt;strong&gt;</code> display text in bold — but they have different purposes. One is purely visual; the other carries meaning.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon"><b>B</b></div><h3>&lt;b&gt; vs &lt;strong&gt; — What is the difference?</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;b&gt;</strong> = Bold — <em>visual styling only</em>. Makes text appear bold. No extra meaning for search engines or screen readers.<br><br>
+        <strong>&lt;strong&gt;</strong> = Bold + <em>semantic importance</em>. Tells the browser "this content is important." Screen readers may announce it differently. Google gives it slight SEO weight.<br><br>
+        <strong>Simple rule:</strong> If the content is genuinely important — use <code>&lt;strong&gt;</code>. If you just want it to look bold with no special meaning — use <code>&lt;b&gt;</code>.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="cm">&lt;!-- b: bold (visual only) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">This is </span><span class="pu">&lt;</span><span class="tg">b</span><span class="pu">&gt;</span><span class="t">bold</span><span class="pu">&lt;/</span><span class="tg">b</span><span class="pu">&gt;</span><span class="t"> text using &lt;b&gt;.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- strong: bold + important meaning --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">This is </span>
+  <span class="pu">&lt;</span><span class="tg">strong</span><span class="pu">&gt;</span><span class="t">important</span><span class="pu">&lt;/</span><span class="tg">strong</span><span class="pu">&gt;</span>
+<span class="t"> text using &lt;strong&gt;.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Both look the same visually --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">b</span><span class="pu">&gt;</span><span class="t">Visual bold</span><span class="pu">&lt;/</span><span class="tg">b</span><span class="pu">&gt;</span>
+  <span class="t"> looks same as </span>
+  <span class="pu">&lt;</span><span class="tg">strong</span><span class="pu">&gt;</span><span class="t">Semantic bold</span><span class="pu">&lt;/</span><span class="tg">strong</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Real use case --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Warning:
+  </span><span class="pu">&lt;</span><span class="tg">strong</span><span class="pu">&gt;</span><span class="t">Do not close this window!</span><span class="pu">&lt;/</span><span class="tg">strong</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- b with colour using style --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">b</span> <span class="at">style</span><span class="pu">="</span><span class="vl">color: crimson;</span><span class="pu">"&gt;</span>
+    <span class="t">Bold + red colour</span>
+  <span class="pu">&lt;/</span><span class="tg">b</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Nesting bold inside paragraph --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Price:
+  </span><span class="pu">&lt;</span><span class="tg">strong</span> <span class="at">style</span><span class="pu">="</span><span class="vl">color: green;</span><span class="pu">"&gt;</span><span class="t">₹499</span><span class="pu">&lt;/</span><span class="tg">strong</span><span class="pu">&gt;</span>
+  <span class="t"> only!</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">LIVE OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:240px" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:16px;line-height:2.2;}</style><p>This is <b>bold</b> text using &lt;b&gt;.</p><p>This is <strong>important</strong> text using &lt;strong&gt;.</p><p><b>Visual bold</b> looks same as <strong>Semantic bold</strong></p><p>Warning: <strong>Do not close this window!</strong></p><p><b style="color:crimson;">Bold + red colour</b></p><p>Price: <strong style="color:green;">₹499</strong> only!</p>'></iframe>
+        </div>
+      </div>
+      <div class="tip"><strong>💡 Prefer &lt;strong&gt;</strong> over <code>&lt;b&gt;</code> in most situations — it carries semantic meaning, helps screen readers, and is better for SEO.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH C — i / em TAG
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch102">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — i and em Tag</div>
+    <h2>i and em Tag</h2>
+    <p class="chapter-desc">Both <code>&lt;i&gt;</code> and <code>&lt;em&gt;</code> make text italic — but like bold tags, they differ in meaning. One is visual, the other is semantic.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon"><i>i</i></div><h3>&lt;i&gt; vs &lt;em&gt; — Italic Tags Explained</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;i&gt;</strong> = Italic — visual/stylistic use only. Good for: book/film titles, foreign/technical words, or text that is just stylistically offset from normal prose.<br><br>
+        <strong>&lt;em&gt;</strong> = Emphasis — italic + stress meaning. Use when you want to emphasise a word the way you would stress it when speaking aloud. Screen readers may change their tone for this.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="cm">&lt;!-- i: italic (stylistic use) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">The film
+  </span><span class="pu">&lt;</span><span class="tg">i</span><span class="pu">&gt;</span><span class="t">Interstellar</span><span class="pu">&lt;/</span><span class="tg">i</span><span class="pu">&gt;</span>
+<span class="t"> is amazing.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">The Latin phrase
+  </span><span class="pu">&lt;</span><span class="tg">i</span><span class="pu">&gt;</span><span class="t">et cetera</span><span class="pu">&lt;/</span><span class="tg">i</span><span class="pu">&gt;</span>
+<span class="t"> means "and so on".</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- em: emphasis (stress meaning) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">I
+  </span><span class="pu">&lt;</span><span class="tg">em</span><span class="pu">&gt;</span><span class="t">never</span><span class="pu">&lt;/</span><span class="tg">em</span><span class="pu">&gt;</span>
+<span class="t"> said she stole the money.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Please
+  </span><span class="pu">&lt;</span><span class="tg">em</span><span class="pu">&gt;</span><span class="t">save</span><span class="pu">&lt;/</span><span class="tg">em</span><span class="pu">&gt;</span>
+<span class="t"> your work now!</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Combine bold + italic --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">strong</span><span class="pu">&gt;&lt;</span><span class="tg">em</span><span class="pu">&gt;</span>
+    <span class="t">Bold and italic together</span>
+  <span class="pu">&lt;/</span><span class="tg">em</span><span class="pu">&gt;&lt;/</span><span class="tg">strong</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- i with style attribute --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">i</span> <span class="at">style</span><span class="pu">="</span><span class="vl">color: purple; font-size: 18px;</span><span class="pu">"&gt;</span>
+    <span class="t">Styled italic text</span>
+  <span class="pu">&lt;/</span><span class="tg">i</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">LIVE OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:260px" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:16px;line-height:2.2;}</style><p>The film <i>Interstellar</i> is amazing.</p><p>The Latin phrase <i>et cetera</i> means "and so on".</p><p>I <em>never</em> said she stole the money.</p><p>Please <em>save</em> your work now!</p><p><strong><em>Bold and italic together</em></strong></p><p><i style="color:purple;font-size:18px;">Styled italic text</i></p>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH D — mark TAG
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch103">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — mark Tag</div>
+    <h2>mark Tag — Highlighted Text</h2>
+    <p class="chapter-desc">The <code>&lt;mark&gt;</code> tag highlights text with a yellow background by default — like a real highlighter pen on paper.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🖊</div><h3>&lt;mark&gt; — Highlight Relevant Text</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;mark&gt;</strong> represents text that is highlighted for reference or relevance in a given context.<br><br>
+        Default appearance: <mark>yellow background</mark>. Can be changed with CSS.<br><br>
+        Common uses: highlighting search results, marking important keywords, drawing attention to specific words in an article.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="cm">&lt;!-- Default yellow highlight --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Exam is on
+  </span><span class="pu">&lt;</span><span class="tg">mark</span><span class="pu">&gt;</span><span class="t">Friday 28th March</span><span class="pu">&lt;/</span><span class="tg">mark</span><span class="pu">&gt;</span><span class="t">.</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Highlighting a search keyword --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Results for "</span>
+  <span class="pu">&lt;</span><span class="tg">mark</span><span class="pu">&gt;</span><span class="t">HTML</span><span class="pu">&lt;/</span><span class="tg">mark</span><span class="pu">&gt;</span>
+<span class="t">":</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Learn
+  </span><span class="pu">&lt;</span><span class="tg">mark</span><span class="pu">&gt;</span><span class="t">HTML</span><span class="pu">&lt;/</span><span class="tg">mark</span><span class="pu">&gt;</span>
+<span class="t"> from scratch.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Custom highlight colour --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">mark</span> <span class="at">style</span><span class="pu">="</span><span class="vl">background-color: lightgreen;
+              color: black;</span><span class="pu">"&gt;</span>
+    <span class="t">Green highlight</span>
+  <span class="pu">&lt;/</span><span class="tg">mark</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">mark</span> <span class="at">style</span><span class="pu">="</span><span class="vl">background-color: lightcoral;
+              color: white;</span><span class="pu">"&gt;</span>
+    <span class="t">Red highlight</span>
+  <span class="pu">&lt;/</span><span class="tg">mark</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">LIVE OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:240px" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:16px;line-height:2.4;}</style><p>Exam is on <mark>Friday 28th March</mark>.</p><p>Results for "<mark>HTML</mark>":</p><p>Learn <mark>HTML</mark> from scratch.</p><p><mark style="background-color:lightgreen;color:black;">Green highlight</mark></p><p><mark style="background-color:lightcoral;color:white;">Red highlight</mark></p>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH E — del & ins (BUCKET LIST)
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch104">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — del &amp; ins Tags (Bucket List)</div>
+    <h2>del and ins Tags</h2>
+    <p class="chapter-desc"><code>&lt;del&gt;</code> shows deleted/old text with a strikethrough line. <code>&lt;ins&gt;</code> shows inserted/new text with an underline. Used together they show changes — perfect for a bucket list!</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">✅</div><h3>Bucket List — Marking Completed Items</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;del&gt;</strong> = Strikethrough — content was removed or completed (crossed off the list).<br>
+        <strong>&lt;ins&gt;</strong> = Underline — content was inserted or added as new.<br><br>
+        Real-world uses: bucket list (done/not done), price cuts (old vs new price), document revisions, to-do lists.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="cm">&lt;!-- Bucket List: del = done, ins = new item --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">h3</span><span class="pu">&gt;</span><span class="t">My Bucket List</span><span class="pu">&lt;/</span><span class="tg">h3</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">ul</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span>
+    <span class="cm">&lt;!-- del: task completed, strikethrough --&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">del</span><span class="pu">&gt;</span><span class="t">Learn HTML</span><span class="pu">&lt;/</span><span class="tg">del</span><span class="pu">&gt;</span> <span class="t">✓</span>
+  <span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">del</span><span class="pu">&gt;</span><span class="t">Visit Chennai</span><span class="pu">&lt;/</span><span class="tg">del</span><span class="pu">&gt;</span> <span class="t">✓</span>
+  <span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">Learn CSS</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span><span class="t">Build a portfolio website</span><span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">li</span><span class="pu">&gt;</span>
+    <span class="cm">&lt;!-- ins: newly added item, underline --&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">ins</span><span class="pu">&gt;</span><span class="t">Learn JavaScript (new goal!)</span><span class="pu">&lt;/</span><span class="tg">ins</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">li</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">ul</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Price cut: del = old price, ins = new --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span> <span class="at">style</span><span class="pu">="</span><span class="vl">font-size: 18px;</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">del</span> <span class="at">style</span><span class="pu">="</span><span class="vl">color: grey;</span><span class="pu">"&gt;</span><span class="t">₹2000</span><span class="pu">&lt;/</span><span class="tg">del</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">ins</span> <span class="at">style</span><span class="pu">="</span><span class="vl">color: green;
+             text-decoration: none;</span><span class="pu">"&gt;</span>
+    <span class="t"> ₹999</span>
+  <span class="pu">&lt;/</span><span class="tg">ins</span><span class="pu">&gt;</span>
+  <span class="t"> — 50% OFF!</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Text revision example --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Meeting at
+  </span><span class="pu">&lt;</span><span class="tg">del</span><span class="pu">&gt;</span><span class="t">3pm</span><span class="pu">&lt;/</span><span class="tg">del</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">ins</span><span class="pu">&gt;</span><span class="t">4pm</span><span class="pu">&lt;/</span><span class="tg">ins</span><span class="pu">&gt;</span>
+<span class="t"> today.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">LIVE OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:280px" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:15px;line-height:2;}</style><h3>My Bucket List</h3><ul><li><del>Learn HTML</del> ✓</li><li><del>Visit Chennai</del> ✓</li><li>Learn CSS</li><li>Build a portfolio website</li><li><ins>Learn JavaScript (new goal!)</ins></li></ul><p style="font-size:18px;"><del style="color:grey;">₹2000</del> <ins style="color:green;text-decoration:none;">₹999</ins> — 50% OFF!</p><p>Meeting at <del>3pm</del> <ins>4pm</ins> today.</p>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH F — sub & sup
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch105">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — sub and sup Tags</div>
+    <h2>sub and sup Tags</h2>
+    <p class="chapter-desc"><code>&lt;sub&gt;</code> renders text <em>below</em> the baseline (subscript). <code>&lt;sup&gt;</code> renders text <em>above</em> the baseline (superscript). Essential for maths, chemistry, and footnotes.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🔬</div><h3>Subscript &amp; Superscript</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;sub&gt;</strong> = Subscript — drops text below the line and makes it smaller. Use for: chemical formulas (H₂O), maths variables, log notation.<br><br>
+        <strong>&lt;sup&gt;</strong> = Superscript — raises text above the line and makes it smaller. Use for: powers/exponents (x²), footnote references, ordinal numbers (1st, 2nd).
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="cm">&lt;!-- sub: BELOW the text baseline --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Water: H</span><span class="pu">&lt;</span><span class="tg">sub</span><span class="pu">&gt;</span><span class="t">2</span><span class="pu">&lt;/</span><span class="tg">sub</span><span class="pu">&gt;</span><span class="t">O</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">CO</span><span class="pu">&lt;</span><span class="tg">sub</span><span class="pu">&gt;</span><span class="t">2</span><span class="pu">&lt;/</span><span class="tg">sub</span><span class="pu">&gt;</span>
+<span class="t"> (Carbon Dioxide)</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- sup: ABOVE the text baseline --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">E = mc</span><span class="pu">&lt;</span><span class="tg">sup</span><span class="pu">&gt;</span><span class="t">2</span><span class="pu">&lt;/</span><span class="tg">sup</span><span class="pu">&gt;&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Area = πr</span><span class="pu">&lt;</span><span class="tg">sup</span><span class="pu">&gt;</span><span class="t">2</span><span class="pu">&lt;/</span><span class="tg">sup</span><span class="pu">&gt;&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Footnote reference --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">This is proven</span>
+  <span class="pu">&lt;</span><span class="tg">sup</span><span class="pu">&gt;</span><span class="t">[1]</span><span class="pu">&lt;/</span><span class="tg">sup</span><span class="pu">&gt;</span>
+<span class="t"> by research.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Ordinal numbers --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="t">1</span><span class="pu">&lt;</span><span class="tg">sup</span><span class="pu">&gt;</span><span class="t">st</span><span class="pu">&lt;/</span><span class="tg">sup</span><span class="pu">&gt;</span>
+  <span class="t"> 2</span><span class="pu">&lt;</span><span class="tg">sup</span><span class="pu">&gt;</span><span class="t">nd</span><span class="pu">&lt;/</span><span class="tg">sup</span><span class="pu">&gt;</span>
+  <span class="t"> 3</span><span class="pu">&lt;</span><span class="tg">sup</span><span class="pu">&gt;</span><span class="t">rd</span><span class="pu">&lt;/</span><span class="tg">sup</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">LIVE OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:240px" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:17px;line-height:2.4;}</style><p>Water: H<sub>2</sub>O</p><p>CO<sub>2</sub> (Carbon Dioxide)</p><p>E = mc<sup>2</sup></p><p>Area = πr<sup>2</sup></p><p>This is proven<sup>[1]</sup> by research.</p><p>1<sup>st</sup> 2<sup>nd</sup> 3<sup>rd</sup></p>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH G — abbr TAG
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch106">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — abbr Tag</div>
+    <h2>abbr Tag (Abbreviation)</h2>
+    <p class="chapter-desc">The <code>&lt;abbr&gt;</code> tag marks abbreviations and acronyms. The <code>title</code> attribute holds the full form — shown as a tooltip when the user hovers over the text.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🔤</div><h3>&lt;abbr title=""&gt; — Hover to See Full Form</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>Syntax:</strong> <code>&lt;abbr title="full form"&gt;SHORT&lt;/abbr&gt;</code><br><br>
+        The browser shows a dotted underline under the abbreviation. When the user hovers, a tooltip with the full form appears.<br><br>
+        Why use it: improves accessibility (screen readers read the full form), helps readers who may not know the abbreviation, and improves SEO.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="cm">&lt;!-- abbr: hover to see full form --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">abbr</span> <span class="at">title</span><span class="pu">="</span><span class="vl">HyperText Markup Language</span><span class="pu">"&gt;</span>
+    <span class="t">HTML</span>
+  <span class="pu">&lt;/</span><span class="tg">abbr</span><span class="pu">&gt;</span>
+  <span class="t"> is the structure of the web.</span>
+<span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">I love using
+  </span><span class="pu">&lt;</span><span class="tg">abbr</span> <span class="at">title</span><span class="pu">="</span><span class="vl">Cascading Style Sheets</span><span class="pu">"&gt;</span>
+    <span class="t">CSS</span>
+  <span class="pu">&lt;/</span><span class="tg">abbr</span><span class="pu">&gt;</span>
+<span class="t"> for styling.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">The
+  </span><span class="pu">&lt;</span><span class="tg">abbr</span> <span class="at">title</span><span class="pu">="</span><span class="vl">World Health Organisation</span><span class="pu">"&gt;</span>
+    <span class="t">WHO</span>
+  <span class="pu">&lt;/</span><span class="tg">abbr</span><span class="pu">&gt;</span>
+<span class="t"> issued a guideline.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">She completed her
+  </span><span class="pu">&lt;</span><span class="tg">abbr</span> <span class="at">title</span><span class="pu">="</span><span class="vl">Doctor of Philosophy</span><span class="pu">"&gt;</span>
+    <span class="t">PhD</span>
+  <span class="pu">&lt;/</span><span class="tg">abbr</span><span class="pu">&gt;</span>
+<span class="t"> in Computer Science.</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">OUTPUT — Hover the words!</span></div>
+          <iframe class="output-frame" style="min-height:200px" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:15px;line-height:2.2;} abbr{cursor:help;}</style><p><abbr title="HyperText Markup Language">HTML</abbr> is the structure of the web.</p><p>I love using <abbr title="Cascading Style Sheets">CSS</abbr> for styling.</p><p>The <abbr title="World Health Organisation">WHO</abbr> issued a guideline.</p><p>She completed her <abbr title="Doctor of Philosophy">PhD</abbr> in Computer Science.</p><p style="font-size:12px;color:#888;">⬆ Hover over the dotted underlined words to see the tooltip!</p>'></iframe>
+        </div>
+      </div>
+      <div class="tip"><strong>💡</strong> Hover over the abbreviations in the output panel to see the full form tooltip appear!</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH H — target ATTRIBUTE
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch107">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — target Attribute in Link Tag</div>
+    <h2>target Attribute in &lt;a&gt; Link Tag</h2>
+    <p class="chapter-desc">The <code>target</code> attribute on a link tag controls <em>where</em> the linked page opens — same tab, new tab, or a frame.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🎯</div><h3>All target Values with Examples</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>target="_self"</strong> = Opens in the <em>same tab</em> (this is the default if you leave target out).<br>
+        <strong>target="_blank"</strong> = Opens in a <em>new browser tab</em> — user stays on your site too.<br>
+        <strong>target="_parent"</strong> = Opens in the parent frame (used with iframes/framesets).<br>
+        <strong>target="_top"</strong> = Breaks out of all frames and opens full page in the browser window.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="cm">&lt;!-- _self: opens in the SAME tab (default) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">https://google.com</span><span class="pu">"</span>
+   <span class="at">target</span><span class="pu">="</span><span class="vl">_self</span><span class="pu">"&gt;</span>
+  <span class="t">Same Tab (default)</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- _blank: opens in a NEW tab --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">https://google.com</span><span class="pu">"</span>
+   <span class="at">target</span><span class="pu">="</span><span class="vl">_blank</span><span class="pu">"&gt;</span>
+  <span class="t">New Tab ↗</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Best practice: add rel for security --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">https://github.com</span><span class="pu">"</span>
+   <span class="at">target</span><span class="pu">="</span><span class="vl">_blank</span><span class="pu">"</span>
+   <span class="at">rel</span><span class="pu">="</span><span class="vl">noopener noreferrer</span><span class="pu">"&gt;</span>
+  <span class="t">GitHub (safe new tab)</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- When to use target="_blank":
+     ✅ External websites
+     ✅ PDF downloads
+     ✅ Docs user wants to keep open
+     ❌ Do NOT use for internal page links --&gt;</span>
+
+<span class="cm">&lt;!-- Internal link: no target needed --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">about.html</span><span class="pu">"&gt;</span>
+  <span class="t">About (internal — same tab)</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">LIVE OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:200px" srcdoc='<style>body{font-family:Arial;padding:14px;} a{display:block;margin:10px 0;padding:9px 14px;border:1px solid #ccc;border-radius:5px;text-decoration:none;color:#1a1a2e;font-size:15px;width:fit-content;}</style><a href="https://google.com" target="_self">📄 Same Tab (default)</a><a href="https://google.com" target="_blank" rel="noopener noreferrer">🔗 New Tab ↗</a><a href="https://github.com" target="_blank" rel="noopener noreferrer">🔒 GitHub (safe new tab)</a><a href="about.html">🏠 About (internal — same tab)</a>'></iframe>
+        </div>
+      </div>
+      <div class="tip"><strong>💡 Security tip:</strong> Always add <code>rel="noopener noreferrer"</code> when using <code>target="_blank"</code>. Without it, the new tab can access and control your page via JavaScript — a real security risk.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH I — IMAGE AS A LINK
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch108">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — Image as a Link</div>
+    <h2>Image as a Link</h2>
+    <p class="chapter-desc">Wrap an <code>&lt;img&gt;</code> inside an <code>&lt;a&gt;</code> tag to make the entire image clickable. Clicking it navigates to the URL.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🖼</div><h3>Clickable Image — &lt;a&gt; wrapping &lt;img&gt;</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        The trick is simple: put the <code>&lt;img&gt;</code> <strong>inside</strong> the <code>&lt;a&gt;</code> tag. The whole image becomes clickable.<br><br>
+        The <code>alt</code> text also serves as the link's text description for screen readers — so write a meaningful alt!<br><br>
+        Common uses: logo linking to homepage, clickable product images, social media icons, image gallery thumbnails.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="cm">&lt;!-- Clickable image: img INSIDE an a tag --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">https://www.google.com</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">img</span> <span class="at">src</span><span class="pu">="</span><span class="vl">https://picsum.photos/200/80</span><span class="pu">"</span>
+       <span class="at">alt</span><span class="pu">="</span><span class="vl">Click to visit Google</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Logo linking to homepage --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">index.html</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">img</span> <span class="at">src</span><span class="pu">="</span><span class="vl">images/logo.png</span><span class="pu">"</span>
+       <span class="at">alt</span><span class="pu">="</span><span class="vl">Home — My Website Logo</span><span class="pu">"</span>
+       <span class="at">width</span><span class="pu">="</span><span class="vl">150</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Opens image link in a new tab --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">https://youtube.com</span><span class="pu">"</span>
+   <span class="at">target</span><span class="pu">="</span><span class="vl">_blank</span><span class="pu">"</span>
+   <span class="at">rel</span><span class="pu">="</span><span class="vl">noopener noreferrer</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">img</span> <span class="at">src</span><span class="pu">="</span><span class="vl">https://picsum.photos/200/60?grayscale</span><span class="pu">"</span>
+       <span class="at">alt</span><span class="pu">="</span><span class="vl">Visit YouTube</span><span class="pu">"</span>
+       <span class="at">style</span><span class="pu">="</span><span class="vl">display: block;</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Image link with border on hover --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">#</span><span class="pu">"</span>
+   <span class="at">style</span><span class="pu">="</span><span class="vl">display: inline-block;
+          border: 3px solid transparent;</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">img</span> <span class="at">src</span><span class="pu">="</span><span class="vl">https://picsum.photos/150/60</span><span class="pu">"</span>
+       <span class="at">alt</span><span class="pu">="</span><span class="vl">Clickable image</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">OUTPUT — Click the images!</span></div>
+          <iframe class="output-frame" style="min-height:260px" srcdoc='<style>body{font-family:Arial;padding:14px;} a{display:block;margin:10px 0;} p{font-size:13px;color:#555;}</style><p><strong>Click any image below:</strong></p><a href="https://www.google.com" target="_blank"><img src="https://picsum.photos/200/70" alt="Click to visit Google" style="border:2px solid #007bff;border-radius:4px;"></a><a href="https://youtube.com" target="_blank" rel="noopener noreferrer"><img src="https://picsum.photos/200/60?grayscale" alt="Visit YouTube" style="display:block;border:2px solid #ccc;border-radius:4px;"></a><a href="#"><img src="https://picsum.photos/150/55" alt="Clickable image" style="border:2px solid #28a745;border-radius:4px;"></a>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH J — class & id
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch109">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — class and id in HTML</div>
+    <h2>class and id in HTML</h2>
+    <p class="chapter-desc"><code>id</code> gives a unique name to one single element. <code>class</code> gives a reusable name to many elements. Both are used to target elements with CSS styling and JavaScript.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🏷</div><h3>id vs class — The Key Differences</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>id</strong> → Unique. Only <em>one</em> element on the page can have a given id value.<br>
+        CSS selector: <code>#header</code> &nbsp;|&nbsp; JS: <code>document.getElementById("header")</code><br>
+        Use for: page sections, anchor jump links (#contact), unique elements like #logo, #main-title.<br><br>
+        <strong>class</strong> → Reusable. <em>Many</em> elements can share the same class name.<br>
+        CSS selector: <code>.card</code> &nbsp;|&nbsp; JS: <code>document.getElementsByClassName("card")</code><br>
+        Use for: repeated UI patterns — cards, buttons, menu items, badges.<br><br>
+        <strong>Multiple classes:</strong> One element can have several classes separated by spaces: <code>class="card featured large"</code>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="pu">&lt;</span><span class="tg">style</span><span class="pu">&gt;</span>
+  <span class="cm">/* id selector: # — unique, one per page */</span>
+  <span class="nr">#page-title</span> <span class="pu">{</span>
+    <span class="t">color: navy;
+    font-size: 26px;</span>
+  <span class="pu">}</span>
+
+  <span class="cm">/* class selector: . — reusable */</span>
+  <span class="nr">.card</span> <span class="pu">{</span>
+    <span class="t">border: 1px solid #ccc;
+    padding: 12px;
+    margin: 6px;
+    border-radius: 6px;</span>
+  <span class="pu">}</span>
+
+  <span class="cm">/* Second class for extra style */</span>
+  <span class="nr">.featured</span> <span class="pu">{</span>
+    <span class="t">background: lightyellow;
+    border-color: orange;</span>
+  <span class="pu">}</span>
+<span class="pu">&lt;/</span><span class="tg">style</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- id: unique element --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">h1</span> <span class="at">id</span><span class="pu">="</span><span class="vl">page-title</span><span class="pu">"&gt;</span><span class="t">Page Title</span><span class="pu">&lt;/</span><span class="tg">h1</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- class: same class on many elements --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">div</span> <span class="at">class</span><span class="pu">="</span><span class="vl">card</span><span class="pu">"&gt;</span><span class="t">Card One</span><span class="pu">&lt;/</span><span class="tg">div</span><span class="pu">&gt;</span>
+<span class="pu">&lt;</span><span class="tg">div</span> <span class="at">class</span><span class="pu">="</span><span class="vl">card</span><span class="pu">"&gt;</span><span class="t">Card Two</span><span class="pu">&lt;/</span><span class="tg">div</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Two classes on one element --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">div</span> <span class="at">class</span><span class="pu">="</span><span class="vl">card featured</span><span class="pu">"&gt;</span>
+  <span class="t">Card Three (featured!)</span>
+<span class="pu">&lt;/</span><span class="tg">div</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- id used as anchor link target --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">#section2</span><span class="pu">"&gt;</span>
+  <span class="t">Jump to Section 2</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+<span class="cm">&lt;!-- ... lots of content ... --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">h2</span> <span class="at">id</span><span class="pu">="</span><span class="vl">section2</span><span class="pu">"&gt;</span><span class="t">Section 2</span><span class="pu">&lt;/</span><span class="tg">h2</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">LIVE OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:260px" srcdoc='<style>#page-title{color:navy;font-size:24px;} .card{border:1px solid #ccc;padding:10px;margin:6px;border-radius:6px;font-family:Arial;font-size:14px;} .featured{background:lightyellow;border-color:orange;font-weight:bold;}</style><h1 id="page-title">Page Title</h1><div class="card">Card One</div><div class="card">Card Two</div><div class="card featured">Card Three (featured!)</div><a href="#section2" style="font-family:Arial;font-size:14px;">Jump to Section 2</a><h2 id="section2" style="font-family:Arial;margin-top:10px;">Section 2</h2>'></iframe>
+        </div>
+      </div>
+      <div class="tip"><strong>💡 Rule:</strong> Use <code>id</code> for unique elements (only once per page). Use <code>class</code> for patterns that repeat. Never use the same <code>id</code> value on two different elements — it will cause bugs in CSS and JavaScript.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH K — IFRAME
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch110">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — iframe Tag</div>
+    <h2>iframe — Embed Another Page</h2>
+    <p class="chapter-desc">An <code>&lt;iframe&gt;</code> (inline frame) embeds an entirely different webpage inside your page. Use it for YouTube videos, Google Maps, and other external embeds.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">🖥</div><h3>iframe — Attributes &amp; Examples</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>src</strong> = URL of the page to embed.<br>
+        <strong>width / height</strong> = Size of the frame in pixels or %.<br>
+        <strong>title</strong> = Accessibility description — required for screen readers.<br>
+        <strong>frameborder="0"</strong> = Removes the default border around the frame.<br>
+        <strong>allowfullscreen</strong> = Allows the embedded content to go fullscreen (needed for YouTube).
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="cm">&lt;!-- YouTube embed (use /embed/VIDEO_ID) --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">iframe</span>
+  <span class="at">src</span><span class="pu">="</span><span class="vl">https://www.youtube.com/embed/VIDEO_ID</span><span class="pu">"</span>
+  <span class="at">width</span><span class="pu">="</span><span class="vl">400</span><span class="pu">"</span>
+  <span class="at">height</span><span class="pu">="</span><span class="vl">225</span><span class="pu">"</span>
+  <span class="at">title</span><span class="pu">="</span><span class="vl">YouTube Video</span><span class="pu">"</span>
+  <span class="at">frameborder</span><span class="pu">="</span><span class="vl">0</span><span class="pu">"</span>
+  <span class="at">allowfullscreen</span><span class="pu">&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">iframe</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Google Map embed --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">iframe</span>
+  <span class="at">src</span><span class="pu">="</span><span class="vl">https://www.google.com/maps/embed?pb=...</span><span class="pu">"</span>
+  <span class="at">width</span><span class="pu">="</span><span class="vl">400</span><span class="pu">"</span>
+  <span class="at">height</span><span class="pu">="</span><span class="vl">250</span><span class="pu">"</span>
+  <span class="at">title</span><span class="pu">="</span><span class="vl">Location Map</span><span class="pu">"</span>
+  <span class="at">frameborder</span><span class="pu">="</span><span class="vl">0</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">iframe</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Responsive width: 100% --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">iframe</span>
+  <span class="at">src</span><span class="pu">="</span><span class="vl">https://example.com</span><span class="pu">"</span>
+  <span class="at">width</span><span class="pu">="</span><span class="vl">100%</span><span class="pu">"</span>
+  <span class="at">height</span><span class="pu">="</span><span class="vl">300</span><span class="pu">"</span>
+  <span class="at">title</span><span class="pu">="</span><span class="vl">Embedded website</span><span class="pu">"</span>
+  <span class="at">frameborder</span><span class="pu">="</span><span class="vl">0</span><span class="pu">"&gt;</span>
+<span class="pu">&lt;/</span><span class="tg">iframe</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- How to get YouTube embed URL:
+  1. Go to your YouTube video
+  2. Click Share → Embed
+  3. Copy the src URL from the code
+  Example URL format:
+  youtube.com/embed/dQw4w9WgXcQ --&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">OUTPUT (visual preview)</span></div>
+          <iframe class="output-frame" style="min-height:220px" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:14px;} .mock{border:1px solid #ccc;border-radius:6px;padding:0;overflow:hidden;margin:8px 0;}</style><p><strong>YouTube embed:</strong></p><div class="mock"><div style="background:#000;height:100px;display:flex;align-items:center;justify-content:center;color:white;gap:10px;font-size:13px;">▶ <span>Replace VIDEO_ID with actual YouTube ID<br><small style="opacity:.7;">e.g. youtube.com/embed/dQw4w9WgXcQ</small></span></div></div><p><strong>Map embed:</strong></p><div class="mock"><div style="background:#e8f5e9;height:80px;display:flex;align-items:center;justify-content:center;color:#333;font-size:13px;">🗺 Get embed code: Google Maps → Share → Embed a map</div></div>'></iframe>
+        </div>
+      </div>
+      <div class="warn"><strong>⚠️</strong> Most websites block iframe embedding for security. Only use URLs that provide official embed codes — YouTube, Google Maps, and Spotify all do. Do <strong>not</strong> try to iframe Facebook, Instagram, or most news sites.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH L — FORMS
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch111">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — Forms in HTML</div>
+    <h2>Forms in HTML</h2>
+    <p class="chapter-desc">Forms collect user data. Every input needs a matching label. The <code>action</code> says where to send data; the <code>method</code> says how to send it.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">📝</div><h3>Complete Form with All Input Types</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>method="get"</strong> = Data appears in the URL (not secure, used for search forms).<br>
+        <strong>method="post"</strong> = Data is hidden in the request body (use for passwords, personal info).<br>
+        <strong>required</strong> = Field cannot be empty on submit. <strong>placeholder</strong> = Hint text inside empty field.<br>
+        <strong>disabled</strong> = Field shown but not editable. <strong>checked</strong> = Pre-selected checkbox/radio.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="pu">&lt;</span><span class="tg">form</span> <span class="at">action</span><span class="pu">="</span><span class="vl">/submit</span><span class="pu">"</span> <span class="at">method</span><span class="pu">="</span><span class="vl">post</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- text input --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">name</span><span class="pu">"&gt;</span><span class="t">Full Name:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">text</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">name</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">name</span><span class="pu">"</span>
+         <span class="at">placeholder</span><span class="pu">="</span><span class="vl">Enter your name</span><span class="pu">"</span> <span class="at">required</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- password input --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">pwd</span><span class="pu">"&gt;</span><span class="t">Password:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">password</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">pwd</span><span class="pu">"</span>
+         <span class="at">placeholder</span><span class="pu">="</span><span class="vl">Password</span><span class="pu">"</span> <span class="at">required</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- email input --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">email</span><span class="pu">"&gt;</span><span class="t">Email:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">email</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">email</span><span class="pu">"</span>
+         <span class="at">placeholder</span><span class="pu">="</span><span class="vl">you@example.com</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- date picker --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">dob</span><span class="pu">"&gt;</span><span class="t">Date of Birth:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">date</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">dob</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">dob</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- radio (same name = one group) --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Gender:</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">radio</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">m</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">gender</span><span class="pu">"</span> <span class="at">value</span><span class="pu">="</span><span class="vl">male</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">m</span><span class="pu">"&gt;</span><span class="t">Male</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">radio</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">f</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">gender</span><span class="pu">"</span> <span class="at">value</span><span class="pu">="</span><span class="vl">female</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">f</span><span class="pu">"&gt;</span><span class="t">Female</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- checkbox --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">p</span><span class="pu">&gt;</span><span class="t">Skills:</span><span class="pu">&lt;/</span><span class="tg">p</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">checkbox</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">html</span><span class="pu">"</span> <span class="at">checked</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">html</span><span class="pu">"&gt;</span><span class="t">HTML</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">checkbox</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">css</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">css</span><span class="pu">"&gt;</span><span class="t">CSS</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- select dropdown --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">city</span><span class="pu">"&gt;</span><span class="t">City:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">select</span> <span class="at">id</span><span class="pu">="</span><span class="vl">city</span><span class="pu">"</span> <span class="at">name</span><span class="pu">="</span><span class="vl">city</span><span class="pu">"&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">option</span> <span class="at">value</span><span class="pu">=""&gt;</span><span class="t">-- Select --</span><span class="pu">&lt;/</span><span class="tg">option</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">option</span> <span class="at">value</span><span class="pu">="</span><span class="vl">chennai</span><span class="pu">" </span><span class="at">selected</span><span class="pu">&gt;</span><span class="t">Chennai</span><span class="pu">&lt;/</span><span class="tg">option</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">option</span> <span class="at">value</span><span class="pu">="</span><span class="vl">delhi</span><span class="pu">"&gt;</span><span class="t">Delhi</span><span class="pu">&lt;/</span><span class="tg">option</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">select</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- textarea --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">msg</span><span class="pu">"&gt;</span><span class="t">Message:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">textarea</span> <span class="at">id</span><span class="pu">="</span><span class="vl">msg</span><span class="pu">"</span> <span class="at">rows</span><span class="pu">="</span><span class="vl">3</span><span class="pu">"</span> <span class="at">cols</span><span class="pu">="</span><span class="vl">28</span><span class="pu">"</span>
+            <span class="at">placeholder</span><span class="pu">="</span><span class="vl">Your message...</span><span class="pu">"&gt;&lt;/</span><span class="tg">textarea</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- submit + reset buttons --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">submit</span><span class="pu">"</span> <span class="at">value</span><span class="pu">="</span><span class="vl">Submit</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">reset</span><span class="pu">"</span> <span class="at">value</span><span class="pu">="</span><span class="vl">Reset</span><span class="pu">"&gt;</span>
+
+<span class="pu">&lt;/</span><span class="tg">form</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">LIVE OUTPUT — Fully functional!</span></div>
+          <iframe class="output-frame" style="min-height:480px" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:13px;}label{font-weight:bold;display:block;margin-top:10px;}input[type=text],input[type=password],input[type=email],input[type=date],select,textarea{padding:6px;border:1px solid #ccc;border-radius:3px;width:95%;margin-top:3px;}input[type=radio],input[type=checkbox]{width:auto;display:inline;}p{font-weight:bold;margin:10px 0 2px;}input[type=submit],input[type=reset]{width:auto;padding:7px 16px;cursor:pointer;margin-right:6px;margin-top:6px;}</style><form action="#" method="post"><label for="name">Full Name:</label><input type="text" id="name" placeholder="Enter your name" required><label for="pwd">Password:</label><input type="password" id="pwd" placeholder="Password" required><label for="email">Email:</label><input type="email" id="email" placeholder="you@example.com"><label for="dob">Date of Birth:</label><input type="date" id="dob"><p>Gender:</p><input type="radio" id="m" name="gender" value="male"><label for="m" style="display:inline;font-weight:normal;margin-left:4px;">Male</label> <input type="radio" id="f" name="gender" value="female"><label for="f" style="display:inline;font-weight:normal;margin-left:4px;">Female</label><p>Skills:</p><input type="checkbox" id="html" checked><label for="html" style="display:inline;font-weight:normal;margin-left:4px;">HTML</label> <input type="checkbox" id="css"><label for="css" style="display:inline;font-weight:normal;margin-left:4px;">CSS</label><label for="city">City:</label><select id="city"><option value="">-- Select --</option><option value="chennai" selected>Chennai</option><option value="delhi">Delhi</option></select><label for="msg">Message:</label><textarea id="msg" rows="3" cols="28" placeholder="Your message..."></textarea><br><input type="submit" value="Submit"><input type="reset" value="Reset"></form>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH M — FIELDSET & LEGEND
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch112">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — fieldset &amp; legend</div>
+    <h2>fieldset and legend Tags</h2>
+    <p class="chapter-desc"><code>&lt;fieldset&gt;</code> draws a visible box that groups related form fields together. <code>&lt;legend&gt;</code> provides a title label on the top border of that box.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">📋</div><h3>Group Form Inputs with fieldset + legend</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>&lt;fieldset&gt;</strong> = Draws a bordered box around a group of related inputs inside a form.<br>
+        <strong>&lt;legend&gt;</strong> = Goes as the first child inside <code>&lt;fieldset&gt;</code>. Appears as a label on the box's top border.<br><br>
+        When to use: Registration forms with sections (Personal Info, Address, Payment), survey questions grouped by topic, radio/checkbox groups that need a heading.
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="pu">&lt;</span><span class="tg">form</span> <span class="at">action</span><span class="pu">="</span><span class="vl">#</span><span class="pu">"</span> <span class="at">method</span><span class="pu">="</span><span class="vl">post</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- First group: personal info --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">fieldset</span><span class="pu">&gt;</span>
+    <span class="cm">&lt;!-- legend: title on the border --&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">legend</span><span class="pu">&gt;</span><span class="t">Personal Information</span><span class="pu">&lt;/</span><span class="tg">legend</span><span class="pu">&gt;</span>
+
+    <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">fname</span><span class="pu">"&gt;</span><span class="t">First Name:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">text</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">fname</span><span class="pu">"</span>
+           <span class="at">placeholder</span><span class="pu">="</span><span class="vl">First name</span><span class="pu">"&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">br</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+
+    <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">lname</span><span class="pu">"&gt;</span><span class="t">Last Name:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">text</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">lname</span><span class="pu">"</span>
+           <span class="at">placeholder</span><span class="pu">="</span><span class="vl">Last name</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">fieldset</span><span class="pu">&gt;</span>
+
+  <span class="pu">&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- Second group: address --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">fieldset</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">legend</span><span class="pu">&gt;</span><span class="t">Address Details</span><span class="pu">&lt;/</span><span class="tg">legend</span><span class="pu">&gt;</span>
+
+    <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">city</span><span class="pu">"&gt;</span><span class="t">City:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">text</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">city</span><span class="pu">"</span>
+           <span class="at">placeholder</span><span class="pu">="</span><span class="vl">Your city</span><span class="pu">"&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">br</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+
+    <span class="pu">&lt;</span><span class="tg">label</span> <span class="at">for</span><span class="pu">="</span><span class="vl">pin</span><span class="pu">"&gt;</span><span class="t">PIN Code:</span><span class="pu">&lt;/</span><span class="tg">label</span><span class="pu">&gt;&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+    <span class="pu">&lt;</span><span class="tg">input</span> <span class="at">type</span><span class="pu">="</span><span class="vl">number</span><span class="pu">"</span> <span class="at">id</span><span class="pu">="</span><span class="vl">pin</span><span class="pu">"</span>
+           <span class="at">placeholder</span><span class="pu">="</span><span class="vl">6-digit PIN</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;/</span><span class="tg">fieldset</span><span class="pu">&gt;</span>
+
+  <span class="pu">&lt;</span><span class="tg">br</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">button</span> <span class="at">type</span><span class="pu">="</span><span class="vl">submit</span><span class="pu">"&gt;</span>
+    <span class="t">Register</span>
+  <span class="pu">&lt;/</span><span class="tg">button</span><span class="pu">&gt;</span>
+
+<span class="pu">&lt;/</span><span class="tg">form</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">LIVE OUTPUT</span></div>
+          <iframe class="output-frame" style="min-height:360px" srcdoc='<style>body{font-family:Arial;padding:14px;font-size:13px;}fieldset{border:2px solid #1a1a2e;border-radius:6px;padding:14px 16px;margin-bottom:10px;}legend{font-weight:bold;color:#1a1a2e;font-size:14px;padding:0 6px;}label{font-weight:bold;display:block;margin-top:6px;}input{padding:6px;border:1px solid #ccc;border-radius:3px;width:95%;margin-top:3px;}button{background:#1a1a2e;color:white;padding:9px 22px;border:none;border-radius:4px;cursor:pointer;margin-top:6px;font-size:14px;}</style><form><fieldset><legend>Personal Information</legend><label for="fname">First Name:</label><input type="text" id="fname" placeholder="First name"><br><br><label for="lname">Last Name:</label><input type="text" id="lname" placeholder="Last name"></fieldset><br><fieldset><legend>Address Details</legend><label for="city2">City:</label><input type="text" id="city2" placeholder="Your city"><br><br><label for="pin">PIN Code:</label><input type="number" id="pin" placeholder="6-digit PIN"></fieldset><br><button type="submit">Register</button></form>'></iframe>
+        </div>
+      </div>
+      <div class="tip"><strong>💡</strong> Screen readers announce the <code>&lt;legend&gt;</code> text before reading each input inside the group — so users with accessibility needs always know which section they are in. Great for long forms.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH N — mailto & tel LINKS
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch113">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — mailto &amp; tel Links</div>
+    <h2>mailto &amp; tel — Email and Phone Links</h2>
+    <p class="chapter-desc">Special URL schemes let links open the user's email app or phone dialer directly — without writing a single line of JavaScript.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">📧</div><h3>mailto: and tel: Schemes</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        <strong>mailto:</strong> prefix → clicking the link opens the user's default email app (Gmail, Outlook, Apple Mail) with a new compose window, pre-filled with the recipient address.<br>
+        You can also pre-fill the <strong>subject</strong> and <strong>body</strong> using URL query parameters.<br><br>
+        <strong>tel:</strong> prefix → on mobile phones, tapping the link opens the phone dialer with the number ready to call. On desktop it may open a calling app (Skype, FaceTime, etc.).<br><br>
+        Use the international format with <code>+</code> and country code for <code>tel:</code> links: <code>tel:+919876543210</code>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE</span></div>
+          <pre class="cb"><span class="cm">&lt;!-- Basic mailto link --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">mailto:jane@example.com</span><span class="pu">"&gt;</span>
+  <span class="t">Send me an Email</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- mailto with subject pre-filled --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">mailto:jane@example.com
+  ?subject=Hello from your website</span><span class="pu">"&gt;</span>
+  <span class="t">Email with subject</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- mailto with subject + body --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">mailto:jane@example.com
+  ?subject=Job Offer
+  &amp;body=Hi Jane, I would like to...</span><span class="pu">"&gt;</span>
+  <span class="t">Email with subject and body</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- tel: link — opens phone dialer --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">tel:+919876543210</span><span class="pu">"&gt;</span>
+  <span class="t">Call +91 98765 43210</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span>
+
+<span class="cm">&lt;!-- Styled email button --&gt;</span>
+<span class="pu">&lt;</span><span class="tg">a</span> <span class="at">href</span><span class="pu">="</span><span class="vl">mailto:jane@example.com</span><span class="pu">"</span>
+   <span class="at">style</span><span class="pu">="</span><span class="vl">background: #1a1a2e;
+          color: white;
+          padding: 10px 20px;
+          text-decoration: none;
+          border-radius: 5px;</span><span class="pu">"&gt;</span>
+  <span class="t">✉ Contact Me</span>
+<span class="pu">&lt;/</span><span class="tg">a</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">LIVE OUTPUT — Click to test!</span></div>
+          <iframe class="output-frame" style="min-height:260px" srcdoc='<style>body{font-family:Arial;padding:14px;} a{display:block;margin:10px 0;font-size:15px;color:#0066cc;}</style><a href="mailto:jane@example.com">✉ Send me an Email</a><a href="mailto:jane@example.com?subject=Hello from your website">✉ Email with subject pre-filled</a><a href="mailto:jane@example.com?subject=Job Offer&body=Hi Jane, I would like to...">✉ Email with subject + body</a><a href="tel:+919876543210">📞 Call +91 98765 43210</a><br><a href="mailto:jane@example.com" style="background:#1a1a2e;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;display:inline-block;font-size:14px;">✉ Contact Me</a>'></iframe>
+        </div>
+      </div>
+      <div class="tip"><strong>💡</strong> Clicking mailto: links requires the user to have a default email app set up. For web-based contact forms (no email app needed), use a regular HTML <code>&lt;form&gt;</code> tag instead. Both approaches are used in real websites.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+  CH O — FAVICON
+══════════════════════════════════════════ -->
+<div class="chapter" id="ch114">
+  <div class="chapter-head">
+    <div class="chapter-num">Chapter — Favicon</div>
+    <h2>Favicon — The Browser Tab Icon</h2>
+    <p class="chapter-desc">A favicon is the tiny icon you see on the browser tab next to the page title. It also appears in bookmarks and browser history. Set it inside the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code> tag.</p>
+  </div>
+
+  <div class="concept">
+    <div class="concept-header"><div class="concept-icon">⭐</div><h3>How to Add a Favicon</h3></div>
+    <div class="concept-body">
+      <div class="explain">
+        A favicon is just a small square image — typically <strong>32×32 pixels</strong> or <strong>16×16 pixels</strong>.<br><br>
+        <strong>File formats:</strong><br>
+        <code>.ico</code> = Old standard format. Works in all browsers including old IE.<br>
+        <code>.png</code> = Modern choice. Clean and simple. 32×32 recommended.<br>
+        <code>.svg</code> = Vector format — scales perfectly at any size (modern browsers only).<br><br>
+        <strong>Where to put the favicon file:</strong> Place it in the same folder as your <code>index.html</code> (the root of your project).<br><br>
+        <strong>Free favicon tools:</strong> favicon.io (from text, image, or emoji), realfavicongenerator.net
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label cl">CODE — Add to &lt;head&gt;</span></div>
+          <pre class="cb"><span class="pu">&lt;</span><span class="tg">head</span><span class="pu">&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">meta</span> <span class="at">charset</span><span class="pu">="</span><span class="vl">UTF-8</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">title</span><span class="pu">&gt;</span><span class="t">My Website</span><span class="pu">&lt;/</span><span class="tg">title</span><span class="pu">&gt;</span>
+
+  <span class="cm">&lt;!-- Option 1: .ico file (classic) --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">link</span>
+    <span class="at">rel</span><span class="pu">="</span><span class="vl">icon</span><span class="pu">"</span>
+    <span class="at">type</span><span class="pu">="</span><span class="vl">image/x-icon</span><span class="pu">"</span>
+    <span class="at">href</span><span class="pu">="</span><span class="vl">favicon.ico</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- Option 2: .png file (modern, preferred) --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">link</span>
+    <span class="at">rel</span><span class="pu">="</span><span class="vl">icon</span><span class="pu">"</span>
+    <span class="at">type</span><span class="pu">="</span><span class="vl">image/png</span><span class="pu">"</span>
+    <span class="at">href</span><span class="pu">="</span><span class="vl">images/favicon.png</span><span class="pu">"</span>
+    <span class="at">sizes</span><span class="pu">="</span><span class="vl">32x32</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- Option 3: .svg file (scales perfectly) --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">link</span>
+    <span class="at">rel</span><span class="pu">="</span><span class="vl">icon</span><span class="pu">"</span>
+    <span class="at">type</span><span class="pu">="</span><span class="vl">image/svg+xml</span><span class="pu">"</span>
+    <span class="at">href</span><span class="pu">="</span><span class="vl">images/favicon.svg</span><span class="pu">"&gt;</span>
+
+  <span class="cm">&lt;!-- Best practice: provide all 3 --&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">link</span> <span class="at">rel</span><span class="pu">="</span><span class="vl">icon</span><span class="pu">"</span> <span class="at">type</span><span class="pu">="</span><span class="vl">image/svg+xml</span><span class="pu">"</span>
+        <span class="at">href</span><span class="pu">="</span><span class="vl">favicon.svg</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">link</span> <span class="at">rel</span><span class="pu">="</span><span class="vl">icon</span><span class="pu">"</span> <span class="at">type</span><span class="pu">="</span><span class="vl">image/png</span><span class="pu">"</span>
+        <span class="at">href</span><span class="pu">="</span><span class="vl">favicon.png</span><span class="pu">"</span> <span class="at">sizes</span><span class="pu">="</span><span class="vl">32x32</span><span class="pu">"&gt;</span>
+  <span class="pu">&lt;</span><span class="tg">link</span> <span class="at">rel</span><span class="pu">="</span><span class="vl">icon</span><span class="pu">"</span> <span class="at">type</span><span class="pu">="</span><span class="vl">image/x-icon</span><span class="pu">"</span>
+        <span class="at">href</span><span class="pu">="</span><span class="vl">favicon.ico</span><span class="pu">"&gt;</span>
+
+<span class="pu">&lt;/</span><span class="tg">head</span><span class="pu">&gt;</span></pre>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div class="dots"><div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div></div><span class="panel-label ol">HOW IT LOOKS</span></div>
+          <iframe class="output-frame" style="min-height:260px" srcdoc='<style>body{font-family:Arial;padding:18px;font-size:14px;line-height:1.8;background:#f8f9fa;}</style><div style="background:white;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.1);margin-bottom:14px;"><div style="background:#e9ecef;border-radius:6px 6px 0 0;padding:8px 14px;display:flex;align-items:center;gap:8px;font-size:13px;"><div style="width:12px;height:12px;border-radius:50%;background:#ff5f57;"></div><div style="width:12px;height:12px;border-radius:50%;background:#febc2e;"></div><div style="width:12px;height:12px;border-radius:50%;background:#28c840;"></div><div style="background:white;border-radius:4px;padding:4px 10px;margin-left:8px;display:flex;align-items:center;gap:6px;font-size:12px;"><span style="font-size:14px;">⭐</span><span>My Website</span></div></div><div style="padding:14px;"><h2 style="font-size:16px;color:#333;">⬆ The favicon (⭐) appears on the browser tab next to the title.</h2></div></div><p><strong>Project folder structure:</strong></p><pre style="background:#1a1a2e;color:#e2e8f0;padding:12px;border-radius:6px;font-size:12px;">my-website/
+  index.html
+  favicon.ico   ← classic format
+  favicon.png   ← modern format
+  favicon.svg   ← vector format
+  css/
+  images/</pre><br><p style="color:#555;font-size:13px;">🛠 <strong>Free tools to create a favicon:</strong><br>• favicon.io — from text, image, or emoji<br>• realfavicongenerator.net — full set generator</p>'></iframe>
+        </div>
+      </div>
+      <div class="tip"><strong>💡 Quick tip:</strong> The simplest favicon is a square image saved as <code>favicon.png</code> at 32×32 pixels, placed in the same folder as <code>index.html</code>, and linked with: <code>&lt;link rel="icon" href="favicon.png"&gt;</code></div>
+    </div>
+  </div>
+</div>
+
+
 </div><!-- end .main -->
 </div><!-- end .layout -->
 
 <button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
 
 <script>
+// Navigate to a chapter by index (original chapters 0-14)
 function show(idx, el) {
   document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('ch' + idx).classList.add('active');
-  el.classList.add('active');
-  document.querySelector('.main').scrollTo({top:0,behavior:'smooth'});
-  // Close sidebar on mobile
-  if(window.innerWidth <= 900) {
-    document.getElementById('sidebar').classList.remove('open');
-  }
+  const ch = document.getElementById('ch' + idx);
+  if (ch) ch.classList.add('active');
+  if (el) el.classList.add('active');
+  document.querySelector('.main').scrollTo(0, 0);
+}
+
+// Navigate to a chapter by id (new chapters 100-114)
+function go(id, el) {
+  document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const ch = document.getElementById('ch' + id);
+  if (ch) ch.classList.add('active');
+  if (el) el.classList.add('active');
+  document.querySelector('.main').scrollTo(0, 0);
 }
 </script>
 </body>
